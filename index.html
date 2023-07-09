@@ -1,234 +1,286 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
- <HEAD>
-  <TITLE>happypigIG</TITLE>
-  <META NAME="Generator" CONTENT="EditPlus">
-  <META NAME="Author" CONTENT="">
-  <META NAME="Keywords" CONTENT="">
-  <META NAME="Description" CONTENT="">
-  <style>
-  html, body{
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-.container{
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #000000;
-}
-  </style>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- </HEAD>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>happypigIG</title>
  
- <BODY>
+<style>
+html,body{
+	margin:0px;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+  background:#000;
+}
  
- <div id="jsi-cherry-container" class="container"></div>
-  <script>
-  var RENDERER = {
-	INIT_CHERRY_BLOSSOM_COUNT : 30,
-	MAX_ADDING_INTERVAL : 10,
+#canvas{
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+</style>
+ 
+</head>
+<body>
+ 
+<canvas id="canvas"></canvas>
+ 
+<script>
+function project3D(x,y,z,vars){
+ 
+	var p,d;
+	x-=vars.camX;
+	y-=vars.camY-8;
+	z-=vars.camZ;
+	p=Math.atan2(x,z);
+	d=Math.sqrt(x*x+z*z);
+	x=Math.sin(p-vars.yaw)*d;
+	z=Math.cos(p-vars.yaw)*d;
+	p=Math.atan2(y,z);
+	d=Math.sqrt(y*y+z*z);
+	y=Math.sin(p-vars.pitch)*d;
+	z=Math.cos(p-vars.pitch)*d;
+	var rx1=-1000;
+	var ry1=1;
+	var rx2=1000;
+	var ry2=1;
+	var rx3=0;
+	var ry3=0;
+	var rx4=x;
+	var ry4=z;
+	var uc=(ry4-ry3)*(rx2-rx1)-(rx4-rx3)*(ry2-ry1);
+	var ua=((rx4-rx3)*(ry1-ry3)-(ry4-ry3)*(rx1-rx3))/uc;
+	var ub=((rx2-rx1)*(ry1-ry3)-(ry2-ry1)*(rx1-rx3))/uc;
+	if(!z)z=0.000000001;
+	if(ua>0&&ua<1&&ub>0&&ub<1){
+		return {
+			x:vars.cx+(rx1+ua*(rx2-rx1))*vars.scale,
+			y:vars.cy+y/z*vars.scale,
+			d:(x*x+y*y+z*z)
+		};
+	}else{
+		return { d:-1 };
+	}
+}
+ 
+ 
+function elevation(x,y,z){
+ 
+	var dist = Math.sqrt(x*x+y*y+z*z);
+	if(dist && z/dist>=-1 && z/dist <=1) return Math.acos(z / dist);
+	return 0.00000001;
+}
+ 
+ 
+function rgb(col){
+ 
+	col += 0.000001;
+	var r = parseInt((0.5+Math.sin(col)*0.5)*16);
+	var g = parseInt((0.5+Math.cos(col)*0.5)*16);
+	var b = parseInt((0.5-Math.sin(col)*0.5)*16);
+	return "#"+r.toString(16)+g.toString(16)+b.toString(16);
+}
+ 
+ 
+function interpolateColors(RGB1,RGB2,degree){
 	
-	init : function(){
-		this.setParameters();
-		this.reconstructMethods();
-		this.createCherries();
-		this.render();
-	},
-	setParameters : function(){
-		this.$container = $('#jsi-cherry-container');
-		this.width = this.$container.width();
-		this.height = this.$container.height();
-		this.context = $('<canvas />').attr({width : this.width, height : this.height}).appendTo(this.$container).get(0).getContext('2d');
-		this.cherries = [];
-		this.maxAddingInterval = Math.round(this.MAX_ADDING_INTERVAL * 1000 / this.width);
-		this.addingInterval = this.maxAddingInterval;
-	},
-	reconstructMethods : function(){
-		this.render = this.render.bind(this);
-	},
-	createCherries : function(){
-		for(var i = 0, length = Math.round(this.INIT_CHERRY_BLOSSOM_COUNT * this.width / 1000); i < length; i++){
-			this.cherries.push(new CHERRY_BLOSSOM(this, true));
-		}
-	},
-	render : function(){
-		requestAnimationFrame(this.render);
-		this.context.clearRect(0, 0, this.width, this.height);
+	var w2=degree;
+	var w1=1-w2;
+	return [w1*RGB1[0]+w2*RGB2[0],w1*RGB1[1]+w2*RGB2[1],w1*RGB1[2]+w2*RGB2[2]];
+}
+ 
+ 
+function rgbArray(col){
+ 
+	col += 0.000001;
+	var r = parseInt((0.5+Math.sin(col)*0.5)*256);
+	var g = parseInt((0.5+Math.cos(col)*0.5)*256);
+	var b = parseInt((0.5-Math.sin(col)*0.5)*256);
+	return [r, g, b];
+}
+ 
+ 
+function colorString(arr){
+ 
+	var r = parseInt(arr[0]);
+	var g = parseInt(arr[1]);
+	var b = parseInt(arr[2]);
+	return "#"+("0" + r.toString(16) ).slice (-2)+("0" + g.toString(16) ).slice (-2)+("0" + b.toString(16) ).slice (-2);
+}
+ 
+ 
+function process(vars){
+ 
+ 
+	if(vars.points.length<vars.initParticles) for(var i=0;i<5;++i) spawnParticle(vars);
+	var p,d,t;
+	
+	p = Math.atan2(vars.camX, vars.camZ);
+	d = Math.sqrt(vars.camX * vars.camX + vars.camZ * vars.camZ);
+	d -= Math.sin(vars.frameNo / 80) / 25;
+	t = Math.cos(vars.frameNo / 300) / 165;
+	vars.camX = Math.sin(p + t) * d;
+	vars.camZ = Math.cos(p + t) * d;
+	vars.camY = -Math.sin(vars.frameNo / 220) * 15;
+	vars.yaw = Math.PI + p + t;
+	vars.pitch = elevation(vars.camX, vars.camZ, vars.camY) - Math.PI / 2;
+	
+	var t;
+	for(var i=0;i<vars.points.length;++i){
 		
-		this.cherries.sort(function(cherry1, cherry2){
-			return cherry1.z - cherry2.z;
-		});
-		for(var i = this.cherries.length - 1; i >= 0; i--){
-			if(!this.cherries[i].render(this.context)){
-				this.cherries.splice(i, 1);
-			}
-		}
-		if(--this.addingInterval == 0){
-			this.addingInterval = this.maxAddingInterval;
-			this.cherries.push(new CHERRY_BLOSSOM(this, false));
+		x=vars.points[i].x;
+		y=vars.points[i].y;
+		z=vars.points[i].z;
+		d=Math.sqrt(x*x+z*z)/1.0075;
+		t=.1/(1+d*d/5);
+		p=Math.atan2(x,z)+t;
+		vars.points[i].x=Math.sin(p)*d;
+		vars.points[i].z=Math.cos(p)*d;
+		vars.points[i].y+=vars.points[i].vy*t*((Math.sqrt(vars.distributionRadius)-d)*2);
+		if(vars.points[i].y>vars.vortexHeight/2 || d<.25){
+			vars.points.splice(i,1);
+			spawnParticle(vars);
 		}
 	}
-};
-var CHERRY_BLOSSOM = function(renderer, isRandom){
-	this.renderer = renderer;
-	this.init(isRandom);
-};
-CHERRY_BLOSSOM.prototype = {
-	FOCUS_POSITION : 300,
-	FAR_LIMIT : 600,
-	MAX_RIPPLE_COUNT : 100,
-	RIPPLE_RADIUS : 100,
-	SURFACE_RATE : 0.5,
-	SINK_OFFSET : 20,
+}
+ 
+function drawFloor(vars){
 	
-	init : function(isRandom){
-		this.x = this.getRandomValue(-this.renderer.width, this.renderer.width);
-		this.y = isRandom ? this.getRandomValue(0, this.renderer.height) : this.renderer.height * 1.5;
-		this.z = this.getRandomValue(0, this.FAR_LIMIT);
-		this.vx = this.getRandomValue(-2, 2);
-		this.vy = -2;
-		this.theta = this.getRandomValue(0, Math.PI * 2);
-		this.phi = this.getRandomValue(0, Math.PI * 2);
-		this.psi = 0;
-		this.dpsi = this.getRandomValue(Math.PI / 600, Math.PI / 300);
-		this.opacity = 0;
-		this.endTheta = false;
-		this.endPhi = false;
-		this.rippleCount = 0;
-		
-		var axis = this.getAxis(),
-			theta = this.theta + Math.ceil(-(this.y + this.renderer.height * this.SURFACE_RATE) / this.vy) * Math.PI / 500;
-		theta %= Math.PI * 2;
-		
-		this.offsetY = 40 * ((theta <= Math.PI / 2 || theta >= Math.PI * 3 / 2) ? -1 : 1);
-		this.thresholdY = this.renderer.height / 2 + this.renderer.height * this.SURFACE_RATE * axis.rate;
-		this.entityColor = this.renderer.context.createRadialGradient(0, 40, 0, 0, 40, 80);
-		this.entityColor.addColorStop(0, 'hsl(330, 70%, ' + 50 * (0.3 + axis.rate) + '%)');
-		this.entityColor.addColorStop(0.05, 'hsl(330, 40%,' + 55 * (0.3 + axis.rate) + '%)');
-		this.entityColor.addColorStop(1, 'hsl(330, 20%, ' + 70 * (0.3 + axis.rate) + '%)');
-		this.shadowColor = this.renderer.context.createRadialGradient(0, 40, 0, 0, 40, 80);
-		this.shadowColor.addColorStop(0, 'hsl(330, 40%, ' + 30 * (0.3 + axis.rate) + '%)');
-		this.shadowColor.addColorStop(0.05, 'hsl(330, 40%,' + 30 * (0.3 + axis.rate) + '%)');
-		this.shadowColor.addColorStop(1, 'hsl(330, 20%, ' + 40 * (0.3 + axis.rate) + '%)');
-	},
-	getRandomValue : function(min, max){
-		return min + (max - min) * Math.random();
-	},
-	getAxis : function(){
-		var rate = this.FOCUS_POSITION / (this.z + this.FOCUS_POSITION),
-			x = this.renderer.width / 2 + this.x * rate,
-			y = this.renderer.height / 2 - this.y * rate;
-		return {rate : rate, x : x, y : y};
-	},
-	renderCherry : function(context, axis){
-		context.beginPath();
-		context.moveTo(0, 40);
-		context.bezierCurveTo(-60, 20, -10, -60, 0, -20);
-		context.bezierCurveTo(10, -60, 60, 20, 0, 40);
-		context.fill();
-		
-		for(var i = -4; i < 4; i++){
-			context.beginPath();
-			context.moveTo(0, 40);
-			context.quadraticCurveTo(i * 12, 10, i * 4, -24 + Math.abs(i) * 2);
-			context.stroke();
-		}
-	},
-	render : function(context){
-		var axis = this.getAxis();
-		
-		if(axis.y == this.thresholdY && this.rippleCount < this.MAX_RIPPLE_COUNT){
-			context.save();
-			context.lineWidth = 2;
-			context.strokeStyle = 'hsla(0, 0%, 100%, ' + (this.MAX_RIPPLE_COUNT - this.rippleCount) / this.MAX_RIPPLE_COUNT + ')';
-			context.translate(axis.x + this.offsetY * axis.rate * (this.theta <= Math.PI ? -1 : 1), axis.y);
-			context.scale(1, 0.3);
-			context.beginPath();
-			context.arc(0, 0, this.rippleCount / this.MAX_RIPPLE_COUNT * this.RIPPLE_RADIUS * axis.rate, 0, Math.PI * 2, false);
-			context.stroke();
-			context.restore();
-			this.rippleCount++;
-		}
-		if(axis.y < this.thresholdY || (!this.endTheta || !this.endPhi)){
-			if(this.y <= 0){
-				this.opacity = Math.min(this.opacity + 0.01, 1);
-			}
-			context.save();
-			context.globalAlpha = this.opacity;
-			context.fillStyle = this.shadowColor;
-			context.strokeStyle = 'hsl(330, 30%,' + 40 * (0.3 + axis.rate) + '%)';
-			context.translate(axis.x, Math.max(axis.y, this.thresholdY + this.thresholdY - axis.y));
-			context.rotate(Math.PI - this.theta);
-			context.scale(axis.rate * -Math.sin(this.phi), axis.rate);
-			context.translate(0, this.offsetY);
-			this.renderCherry(context, axis);
-			context.restore();
-		}
-		context.save();
-		context.fillStyle = this.entityColor;
-		context.strokeStyle = 'hsl(330, 40%,' + 70 * (0.3 + axis.rate) + '%)';
-		context.translate(axis.x, axis.y + Math.abs(this.SINK_OFFSET * Math.sin(this.psi) * axis.rate));
-		context.rotate(this.theta);
-		context.scale(axis.rate * Math.sin(this.phi), axis.rate);
-		context.translate(0, this.offsetY);
-		this.renderCherry(context, axis);
-		context.restore();
-		
-		if(this.y <= -this.renderer.height / 4){
-			if(!this.endTheta){
-				for(var theta = Math.PI / 2, end = Math.PI * 3 / 2; theta <= end; theta += Math.PI){
-					if(this.theta < theta && this.theta + Math.PI / 200 > theta){
-						this.theta = theta;
-						this.endTheta = true;
-						break;
-					}
-				}
-			}
-			if(!this.endPhi){
-				for(var phi = Math.PI / 8, end = Math.PI * 7 / 8; phi <= end; phi += Math.PI * 3 / 4){
-					if(this.phi < phi && this.phi + Math.PI / 200 > phi){
-						this.phi = Math.PI / 8;
-						this.endPhi = true;
-						break;
-					}
+	var x,y,z,d,point,a;
+	for (var i = -25; i <= 25; i += 1) {
+		for (var j = -25; j <= 25; j += 1) {
+			x = i*2;
+			z = j*2;
+			y = vars.floor;
+			d = Math.sqrt(x * x + z * z);
+			point = project3D(x, y-d*d/85, z, vars);
+			if (point.d != -1) {
+				size = 1 + 15000 / (1 + point.d);
+				a = 0.15 - Math.pow(d / 50, 4) * 0.15;
+				if (a > 0) {
+					vars.ctx.fillStyle = colorString(interpolateColors(rgbArray(d/26-vars.frameNo/40),[0,128,32],.5+Math.sin(d/6-vars.frameNo/8)/2));
+					vars.ctx.globalAlpha = a;
+					vars.ctx.fillRect(point.x-size/2,point.y-size/2,size,size);
 				}
 			}
 		}
-		if(!this.endTheta){
-			if(axis.y == this.thresholdY){
-				this.theta += Math.PI / 200 * ((this.theta < Math.PI / 2 || (this.theta >= Math.PI && this.theta < Math.PI * 3 / 2)) ? 1 : -1);
-			}else{
-				this.theta += Math.PI / 500;
+	}		
+	vars.ctx.fillStyle = "#82f";
+	for (var i = -25; i <= 25; i += 1) {
+		for (var j = -25; j <= 25; j += 1) {
+			x = i*2;
+			z = j*2;
+			y = -vars.floor;
+			d = Math.sqrt(x * x + z * z);
+			point = project3D(x, y+d*d/85, z, vars);
+			if (point.d != -1) {
+				size = 1 + 15000 / (1 + point.d);
+				a = 0.15 - Math.pow(d / 50, 4) * 0.15;
+				if (a > 0) {
+					vars.ctx.fillStyle = colorString(interpolateColors(rgbArray(-d/26-vars.frameNo/40),[32,0,128],.5+Math.sin(-d/6-vars.frameNo/8)/2));
+					vars.ctx.globalAlpha = a;
+					vars.ctx.fillRect(point.x-size/2,point.y-size/2,size,size);
+				}
 			}
-			this.theta %= Math.PI * 2;
 		}
-		if(this.endPhi){
-			if(this.rippleCount == this.MAX_RIPPLE_COUNT){
-				this.psi += this.dpsi;
-				this.psi %= Math.PI * 2;
-			}
-		}else{
-			this.phi += Math.PI / ((axis.y == this.thresholdY) ? 200 : 500);
-			this.phi %= Math.PI;
+	}		
+}
+ 
+function sortFunction(a,b){
+	return b.dist-a.dist;
+}
+ 
+function draw(vars){
+ 
+	vars.ctx.globalAlpha=.15;
+	vars.ctx.fillStyle="#000";
+	vars.ctx.fillRect(0, 0, canvas.width, canvas.height);
+	
+	drawFloor(vars);
+	
+	var point,x,y,z,a;
+	for(var i=0;i<vars.points.length;++i){
+		x=vars.points[i].x;
+		y=vars.points[i].y;
+		z=vars.points[i].z;
+		point=project3D(x,y,z,vars);
+		if(point.d != -1){
+			vars.points[i].dist=point.d;
+			size=1+vars.points[i].radius/(1+point.d);
+			d=Math.abs(vars.points[i].y);
+			a = .8 - Math.pow(d / (vars.vortexHeight/2), 1000) * .8;
+			vars.ctx.globalAlpha=a>=0&&a<=1?a:0;
+			vars.ctx.fillStyle=rgb(vars.points[i].color);
+			if(point.x>-1&&point.x<vars.canvas.width&&point.y>-1&&point.y<vars.canvas.height)vars.ctx.fillRect(point.x-size/2,point.y-size/2,size,size);
 		}
-		if(this.y <= -this.renderer.height * this.SURFACE_RATE){
-			this.x += 2;
-			this.y = -this.renderer.height * this.SURFACE_RATE;
-		}else{
-			this.x += this.vx;
-			this.y += this.vy;
-		}
-		return this.z > -this.FOCUS_POSITION && this.z < this.FAR_LIMIT && this.x < this.renderer.width * 1.5;
 	}
-};
-$(function(){
-	RENDERER.init();
-});
-  </script>
- </BODY>
-</HTML>
+	vars.points.sort(sortFunction);
+}
+ 
+ 
+function spawnParticle(vars){
+ 
+	var p,ls;
+	pt={};
+	p=Math.PI*2*Math.random();
+	ls=Math.sqrt(Math.random()*vars.distributionRadius);
+	pt.x=Math.sin(p)*ls;
+	pt.y=-vars.vortexHeight/2;
+	pt.vy=vars.initV/20+Math.random()*vars.initV;
+	pt.z=Math.cos(p)*ls;
+	pt.radius=200+800*Math.random();
+	pt.color=pt.radius/1000+vars.frameNo/250;
+	vars.points.push(pt);	
+}
+ 
+function frame(vars) {
+ 
+	if(vars === undefined){
+		var vars={};
+		vars.canvas = document.querySelector("canvas");
+		vars.ctx = vars.canvas.getContext("2d");
+		vars.canvas.width = document.body.clientWidth;
+		vars.canvas.height = document.body.clientHeight;
+		window.addEventListener("resize", function(){
+			vars.canvas.width = document.body.clientWidth;
+			vars.canvas.height = document.body.clientHeight;
+			vars.cx=vars.canvas.width/2;
+			vars.cy=vars.canvas.height/2;
+		}, true);
+		vars.frameNo=0;
+ 
+		vars.camX = 0;
+		vars.camY = 0;
+		vars.camZ = -14;
+		vars.pitch = elevation(vars.camX, vars.camZ, vars.camY) - Math.PI / 2;
+		vars.yaw = 0;
+		vars.cx=vars.canvas.width/2;
+		vars.cy=vars.canvas.height/2;
+		vars.bounding=10;
+		vars.scale=500;
+		vars.floor=26.5;
+ 
+		vars.points=[];
+		vars.initParticles=700;
+		vars.initV=.01;
+		vars.distributionRadius=800;
+		vars.vortexHeight=25;
+	}
+ 
+	vars.frameNo++;
+	requestAnimationFrame(function() {
+		frame(vars);
+	});
+ 
+	process(vars);
+	draw(vars);
+}
+frame();
+</script>
+ 
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：360、FireFox、Chrome、Opera、傲游、搜狗、世界之窗. 不支持Safari、IE8及以下浏览器。</p>
+<p><a href="http://sc.chinaz.com/" target="_blank"></a></p>
+</div>
+</body>
+</html>
