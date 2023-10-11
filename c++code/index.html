@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>一些实用的C++ code | happypigIG&#39;s blog</title>
+<meta name="description" content="happypigIG de blog,快乐猪">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://kalipig.github.io//favicon.ico?v=1697032332131">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://kalipig.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://kalipig.github.io/">happypigIG&#39;s blog</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>一些实用的C++ code</h1>
+            <p class="article-meta">
+              2023-08-09
+              
+                <a href="https://kalipig.github.io/tag/rwYM0r0vJ/" class="badge secondary">
+                  c++
+                </a>
+              
+            </p>
+            
+              <img src="https://kalipig.github.io//post-images/c++code.png" alt="一些实用的C++ code">
+            
+            <div class="post-content" v-pre>
+              <h3 id="头文件猪函数">头文件+猪函数</h3>
+<p>Clang干嘛～哎呦</p>
+<pre><code class="language-c++">#include&lt;cstdio&gt;
+#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;queue&gt;
+#include&lt;map&gt;
+#include&lt;algorithm&gt;
+#include&lt;cmath&gt;
+#include&lt;vector&gt;
+#include&lt;stack&gt;
+#include&lt;string&gt;
+#include&lt;list&gt;
+using namespace std;
+
+int main(){
+
+    return 0;
+}
+</code></pre>
+<h3 id="快读">快读</h3>
+<pre><code class="language-c++">inline int read()
+{
+    int x=0,f=1;
+    char ch=getchar();
+    while(ch&lt;'0'||ch&gt;'9')
+    {
+        if(ch=='-')
+            f=-1;
+        ch=getchar();
+    }
+    while(ch&gt;='0' &amp;&amp; ch&lt;='9')
+        x=x*10+ch-'0',ch=getchar();
+    return x*f;
+}
+
+</code></pre>
+<h3 id="高精度">高精度</h3>
+<pre><code class="language-c++">vector&lt;int&gt; add(const vector&lt;int&gt;&amp; num1, const vector&lt;int&gt;&amp; num2) {
+    int carry = 0;
+    vector&lt;int&gt; result;
+    
+    int len1 = num1.size(), len2 = num2.size();
+    int len = max(len1, len2);
+    
+    for (int i = 0; i &lt; len; ++i) {
+        int sum = carry;
+        if (i &lt; len1) {
+            sum += num1[i];
+        }
+        if (i &lt; len2) {
+            sum += num2[i];
+        }
+        
+        carry = sum / 10;
+        result.push_back(sum % 10);
+    }
+    
+    if (carry) {
+        result.push_back(carry);
+    }
+    
+    return result;
+}
+
+vector&lt;int&gt; subtract(const vector&lt;int&gt;&amp; num1, const vector&lt;int&gt;&amp; num2) {
+    vector&lt;int&gt; result;
+    int borrow = 0;
+    
+    int len1 = num1.size(), len2 = num2.size();
+    int len = max(len1, len2);
+    
+    for (int i = 0; i &lt; len; ++i) {
+        int diff = borrow;
+        if (i &lt; len1) {
+            diff += num1[i];
+        }
+        if (i &lt; len2) {
+            diff -= num2[i];
+        }
+        
+        if (diff &lt; 0) {
+            diff += 10;
+            borrow = -1;
+        } else {
+            borrow = 0;
+        }
+        
+        result.push_back(diff);
+    }
+    
+    while (result.size() &gt; 1 &amp;&amp; result.back() == 0) {
+        result.pop_back();
+    }
+    
+    return result;
+}
+vector&lt;int&gt; intToVector(int num) {
+    vector&lt;int&gt; result;
+    while (num &gt; 0) {
+        result.push_back(num % 10);
+        num /= 10;
+    }
+    if (result.empty()) {
+        result.push_back(0); // 处理 0 的情况
+    }
+    return result;
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://kalipig.github.io//images/avatar.png?v=1697032332131" class="no-responsive avatar">
+    <div class="text-muted">happypigIG de blog,快乐猪</div>
+    <div class="social-container">
+      
+        
+          <a href="https://github.com/kalipig/kalipig.github.io/tree/main" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/happypigIG" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/3mSBATgOt/">latex</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/yUou1LHfA/">数论 2</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/Ycki7Z3br/">数论 1</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/ITpSYIbu9/">树型背包（P1064）</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/c++code/">一些实用的C++ code</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://kalipig.github.io/tag/numbertheory/" class="badge secondary">
+          数论
+        </a>
+      
+        <a href="https://kalipig.github.io/tag/rwYM0r0vJ/" class="badge secondary">
+          c++
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    My <a href="https://github.com/klipig/kalipig.github.io" target="_blank">github</a> | <a class="rss" href="https://kalipig.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

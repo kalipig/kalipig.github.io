@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>树型背包（P1064） | happypigIG&#39;s blog</title>
+<meta name="description" content="happypigIG de blog,快乐猪">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://kalipig.github.io//favicon.ico?v=1697032332131">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://kalipig.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://kalipig.github.io/">happypigIG&#39;s blog</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>树型背包（P1064）</h1>
+            <p class="article-meta">
+              2023-08-22
+              
+                <a href="https://kalipig.github.io/tag/rwYM0r0vJ/" class="badge warning">
+                  c++
+                </a>
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h1 id="树形背包">树形背包</h1>
+<p>[P1064 [NOIP2006 提高组] 金明的预算方案]([P1064 <a href="https://www.luogu.com.cn/problem/P1064">NOIP2006 提高组] 金明的预算方案 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a>)</p>
+<p>基本问题：在一棵树中，每个节点i价值有价值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>w</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">w_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>,体积<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>v</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">v_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>,背包容量为m,使所有选的节点的价值和最大。</p>
+<p>满足<strong>如果节点u选了,那么所有u的祖先都必须选</strong></p>
+<p>如题目中的主件与付件。</p>
+<h3 id="solve">solve</h3>
+<p>有依赖背包附件依赖主件可以看成主件向附件连了一条有向边，由于主件之间是没有练习的，我们就设一个虚点将主件连起来，这样就构成了一棵以虚点为根的树，然后在树的每一条链上做类似01背包的操作。</p>
+<p>我们设<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>u</mi><mo>]</mo><mo>[</mo><mi>t</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">f[u][t]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault">u</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault">t</span><span class="mclose">]</span></span></span></span>为选u这个物件（父节点）大小为t的背包所获得的最大价值，v为u的附件（子节点），如果能装下v，那么就更新最优值。另外，当u不为0时，跑一次将u装下去的情况，这样<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mn>0</mn><mo>]</mo><mo>[</mo><mi>m</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">f[0][m]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault">m</span><span class="mclose">]</span></span></span></span>（m是背包大小，0为虚点，即根，如果在某些问题中0已经有意义了，可以换成其它值当作根，那时最优解为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>[</mo><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi><mo>]</mo><mo>[</mo><mi>m</mi><mo>]</mo><mi mathvariant="normal">）</mi></mrow><annotation encoding="application/x-tex">f[root][m]）</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault">m</span><span class="mclose">]</span><span class="mord cjk_fallback">）</span></span></span></span>便是最终的解了。</p>
+<p>但是单单做上面的不能解决这个问题，我们发现m可以非常大，在树上跑01背包耗时很多，将每个体积和m都除以10仍会T掉第10个点。这时我尝试了一下发现第10个点中m和t[i]都是100的倍数，于是，我们可以判定一下，如果都是100的倍数就除以100，通过这个神奇~~（无耻）~~的优化，可以过掉这个题。</p>
+<h3 id="code">code</h3>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+#include&lt;queue&gt;
+#include&lt;map&gt;
+using namespace std;
+inline int read()
+{
+    int x=0,f=1;
+    char ch=getchar();
+    while(ch&lt;'0'||ch&gt;'9')
+    {
+        if(ch=='-')
+            f=-1;
+        ch=getchar();
+    }
+    while(ch&gt;='0' &amp;&amp; ch&lt;='9')
+        x=x*10+ch-'0',ch=getchar();
+    return x*f;
+}
+int h[100005],f[100][5000],w[2000],v[2000],m;
+struct edge{
+  int next,v;
+}e[10005];
+inline void add(int a,int b){
+  p++;
+  e[p].next=h[a];
+  h[a]=p;
+  e[p].v=b; 
+}
+int n,flag;
+inline void input(){
+  m=read();
+  n=read();
+  m/=10;
+  for(int i=1,p,x;i&lt;=n;i++){
+    w[i]=read();
+    v[i]=read();
+    p=read();
+    w[i]/=10;
+    if(w[i]%10&gt;0) flag=1;
+    v[i]*=w[i];
+    add(p,i);
+  }
+  if(!flag){
+    m/=10;
+    for(int i=1;i&lt;=n;i++){
+      w[i]/=10;
+    }
+  }
+ memset(f,0xcf,sizeof(f));
+}
+in void dfs(int u){
+    for(int i=0;i&lt;=w[u];i++)f[u][i]=0;
+    for(int i=h[u];i;i=e[i].next){
+    	int v=e[i].v;
+    	dfs(v);
+    	for(int t=m;t&gt;=w[v];t--){
+    		for(int j=t;j&gt;=w[v];j--)
+    		f[u][t]=max(f[u][t],f[u][t-j]+f[v][j]);
+        }
+    }
+    if(u!=0){
+        for(int t=m;t&gt;=w[u];t--)f[u][t]=f[u][t-w[u]]+v[u];
+    }
+}
+int main(){
+    putin();
+    dfs(0)；
+     printf(&quot;%d&quot;,f[0][m]*10);
+    return 0;
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://kalipig.github.io/c++code/">
+                <h3 class="post-title">
+                  一些实用的C++ code
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://kalipig.github.io//images/avatar.png?v=1697032332131" class="no-responsive avatar">
+    <div class="text-muted">happypigIG de blog,快乐猪</div>
+    <div class="social-container">
+      
+        
+          <a href="https://github.com/kalipig/kalipig.github.io/tree/main" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/happypigIG" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/3mSBATgOt/">latex</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/yUou1LHfA/">数论 2</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/Ycki7Z3br/">数论 1</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/ITpSYIbu9/">树型背包（P1064）</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kalipig.github.io/c++code/">一些实用的C++ code</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://kalipig.github.io/tag/numbertheory/" class="badge warning">
+          数论
+        </a>
+      
+        <a href="https://kalipig.github.io/tag/rwYM0r0vJ/" class="badge ">
+          c++
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    My <a href="https://github.com/klipig/kalipig.github.io" target="_blank">github</a> | <a class="rss" href="https://kalipig.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>
