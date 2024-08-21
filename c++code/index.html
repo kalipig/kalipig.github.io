@@ -105,8 +105,8 @@ int main(){
 using namespace std;
 using LL=long long;
 LL n,m,s,dis[500005];
-vector<pair<int, LL> > v[500005];
-priority_queue<pair<int,LL>,vector<pair<int,LL> >,greater<pair<int,LL> > > q; 
+vector<pair<LL,int> > v[500005];
+priority_queue<pair<LL,int>,vector<pair<LL,int> >,greater<pair<LL,int> > > q; 
 void dijkstra(){
 	q.push({0,s});
 	while(!q.empty()){
@@ -121,7 +121,7 @@ void dijkstra(){
 }
 int main(){
 	ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-	memset(dis,1e9+7,sizeof(dis));
+	memset(dis,0x3f,sizeof(dis));
 	cin>>n>>m>>s;
 	while(m--){
 		LL U,V,W;
@@ -130,7 +130,7 @@ int main(){
 	}
 	dijkstra();
 	for(int i=1;i<=n;i++){
-		cout<<(dis[i]==(1e9+7)?-1:dis[i])<<' ';
+		cout<<(dis[i]==(0x3f3f3f3f)?-1:dis[i])<<' ';
 	}
 	return 0;
 }
