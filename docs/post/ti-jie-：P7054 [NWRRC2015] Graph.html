@@ -7,18 +7,16 @@
     <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     
     <link rel="icon" href="https://cdn.luogu.com.cn/upload/image_hosting/x3aer81z.png?x-oss-process=image/resize,m_lfit,h_170,w_225">
-<meta name="description" content="## CF2072D
-### Problem
-给你一个数列，长度为 $n$，现在移动一个位置的数，问让移动后数列中逆序对的数量最少的方法。">
-<meta property="og:title" content="题解：CF2072D For Wizards, the Exam Is Easy, but I Couldn't Handle It">
-<meta property="og:description" content="## CF2072D
-### Problem
-给你一个数列，长度为 $n$，现在移动一个位置的数，问让移动后数列中逆序对的数量最少的方法。">
+<meta name="description" content="## 题解：P7054 [NWRRC2015] Graph
+观察题目，我们要让**字典序最小**，就是要让第一位最小，然后第二位，以此类推，则可以想到贪心。">
+<meta property="og:title" content="题解：P7054 [NWRRC2015] Graph">
+<meta property="og:description" content="## 题解：P7054 [NWRRC2015] Graph
+观察题目，我们要让**字典序最小**，就是要让第一位最小，然后第二位，以此类推，则可以想到贪心。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2072D%20For%20Wizards%2C%20the%20Exam%20Is%20Easy%2C%20but%20I%20Couldn%27t%20Handle%20It.html">
+<meta property="og:url" content="https://kalipig.github.io/post/ti-jie-%EF%BC%9AP7054%20%5BNWRRC2015%5D%20Graph.html">
 <meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/x3aer81z.png?x-oss-process=image/resize,m_lfit,h_170,w_225">
-<title>题解：CF2072D For Wizards, the Exam Is Easy, but I Couldn't Handle It</title>
-<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+<title>题解：P7054 [NWRRC2015] Graph</title>
+
 
 
 </head>
@@ -60,7 +58,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">题解：CF2072D For Wizards, the Exam Is Easy, but I Couldn't Handle It</h1>
+<h1 class="postTitle">题解：P7054 [NWRRC2015] Graph</h1>
 <div class="title-right">
     <a href="https://kalipig.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -68,7 +66,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/kalipig/kalipig.github.io/issues/12" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/kalipig/kalipig.github.io/issues/15" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -84,56 +82,70 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h2>CF2072D</h2>
-<h3>Problem</h3>
-<p>给你一个数列，长度为 $n$，现在移动一个位置的数，问让移动后数列中逆序对的数量最少的方法。</p>
-<h3>Solution</h3>
-<p>我们首先可以想到就是要让减少的逆序对最多，然后可以发现题目中有一句话：</p>
-<p>It is guaranteed that the sum of $n^2$ across all test cases does not exceed $4⋅10^6$.</p>
-<p>意思就是用 $O(n^2)$ 的算法可以过，实际上存在复杂度更优的解法（数据结构维护）。<br>
-那么显然想到先枚举一个数 $a_i$，然后枚举目标位置 $j$，那么怎么计算减少的数量呢？<br>
-考虑记录一下：</p>
-<ul>
-<li>
-$cnt$:$a_j&gt;a_i$ 的 $j$ 的数量。</li>
-<li>
-$cntt$:$a_j=a_i$ 的 $j$ 的数量。</li>
-</ul>
-<p>所以最后减少的就是：<br>
-$$cnt-(i-j-cnt-cntt)$$<br>
-$$2\times cnt+cntt-(j-i)$$</p>
+<div class="markdown-body" id="postBody"><h2>题解：P7054 [NWRRC2015] Graph</h2>
+<p>观察题目，我们要让<strong>字典序最小</strong>，就是要让第一位最小，然后第二位，以此类推，则可以想到贪心。<br>
+连 $k$ 条边，就是要在拓扑排序中有 $k$ 步可以选择，且每一步找一个小一点的点来连。那么这个点怎么连呢？<br>
+这里参考了 <a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/dengduck/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/dengduck">@dengduck</a> 大佬的思路，直接把所有这样的点用一个大根堆存起来，在拓扑的过程中取出来用。<br>
+同时，要字典序最小，需要把拓扑排序的队列换成小根堆，并且记录路径。</p>
+<p><strong>注意：如果你的代码没过样例不着急</strong><br>
+不要忘了有<br>
+<code class="notranslate">special judge</code>，对于第一组样例，这个输出是可以的（<del>被耽误了很久</del>）：</p>
+<pre class="notranslate"><code class="notranslate">5 1 4 2 3
+2
+5 1
+2 3
+</code></pre>
 <h3>Code</h3>
-<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
-<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,a[<span class="pl-c1">500005</span>],ans,l,r,t;
-<span class="pl-k">int</span> <span class="pl-en">main</span>(){
-    cin&gt;&gt;t;
-    <span class="pl-k">while</span>(t--){
-        ans=<span class="pl-c1">0</span>;
-        cin&gt;&gt;n;
-        <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++){
-            cin&gt;&gt;a[i];
+<pre class="notranslate"><code class="notranslate">#include&lt;bits/stdc++.h&gt;
+#define endl '\n'
+using namespace std;
+using LL=long long;
+LL n,m,in[500005],k,tmp[500005],cnt;
+vector&lt;LL&gt; v[500005],order;
+priority_queue&lt;LL,vector&lt;LL&gt;,greater&lt;LL&gt; &gt; q;
+priority_queue&lt;LL,vector&lt;LL&gt;,less&lt;LL&gt; &gt; p;
+vector&lt;pair&lt;LL,LL&gt; &gt; res;
+void topsort(){
+    for(int i=1;i&lt;=n;i++) if(!in[i]) q.push(i);
+    while((q.size()+p.size())){
+        cnt++;tmp[cnt]=tmp[cnt-1];
+        while(min(k,LL(q.size()))){
+            if(q.top()&gt;(!p.empty() ? p.top() : 0)&amp;&amp;q.size()==1) break;
+            p.push(q.top()),q.pop(),k--;
         }
-        <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++){
-            LL cnt=<span class="pl-c1">0</span>,cntt=<span class="pl-c1">0</span>;
-            <span class="pl-k">for</span>(<span class="pl-k">int</span> j=i+<span class="pl-c1">1</span>;j&lt;=n;j++){
-                <span class="pl-k">if</span>(a[j]==a[i]) cntt++;
-                <span class="pl-k">if</span>(a[j]&lt;a[i]){
-                    cnt++;
-                    <span class="pl-k">if</span>(ans&lt;=<span class="pl-c1">2</span>*cnt+cntt-(j-i)){
-                        ans=<span class="pl-c1">2</span>*cnt+cntt-(j-i);
-                        l=i,r=j;
-                        <span class="pl-c"><span class="pl-c">//</span>cout&lt;&lt;ans&lt;&lt;l&lt;&lt;' '&lt;&lt;r&lt;&lt;endl;</span>
-                    }
-                }
-            }
+        if(!q.empty()){
+            tmp[cnt]=q.top(),q.pop();
+        } else{
+            tmp[cnt]=p.top(),p.pop();
+            if(tmp[cnt-1]) res.push_back({tmp[cnt-1],tmp[cnt]});
         }
-        <span class="pl-k">if</span>(ans==<span class="pl-c1">0</span>) l=r=<span class="pl-c1">1</span>;
-        cout&lt;&lt;l&lt;&lt;<span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>&lt;&lt;r&lt;&lt;endl;
+        for(auto i : v[tmp[cnt]]){
+            in[i]--;
+            if(!in[i]) q.push(i);
+        }
+        order.push_back(tmp[cnt]);
     }
-    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
-}</pre></div></div>
+    return ;
+}
+int main(){
+    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;
+    for(int i=1,x,y;i&lt;=m;i++){
+        cin&gt;&gt;x&gt;&gt;y;
+        v[x].push_back(y);
+        in[y]++;
+    }
+    topsort();
+    for(auto i : order){
+        cout&lt;&lt;i&lt;&lt;' ';
+    }
+    cout&lt;&lt;endl;
+    cout&lt;&lt;res.size()&lt;&lt;endl;
+    for(auto i : res){
+        cout&lt;&lt;i.first&lt;&lt;' '&lt;&lt;i.second&lt;&lt;endl;
+    }
+    return 0;
+}
+</code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
