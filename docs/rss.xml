@@ -1,21 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>IGpig's Blog</title><link>https://kalipig.github.io</link><description>IGpig's blog,recording oi and other passages.</description><copyright>IGpig's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.luogu.com.cn/upload/image_hosting/x3aer81z.png?x-oss-process=image/resize,m_lfit,h_170,w_225</url><title>avatar</title><link>https://kalipig.github.io</link></image><lastBuildDate>Thu, 15 May 2025 09:28:43 +0000</lastBuildDate><managingEditor>IGpig's Blog</managingEditor><ttl>60</ttl><webMaster>IGpig's Blog</webMaster><item><title>题解：CF2094E Boneca Ambalabu</title><link>https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2094E%20Boneca%20Ambalabu.html</link><description>## CF2094E
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>IGpig's Blog</title><link>https://kalipig.github.io</link><description>IGpig's blog,recording oi and other passages.</description><copyright>IGpig's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.luogu.com.cn/upload/image_hosting/x3aer81z.png?x-oss-process=image/resize,m_lfit,h_170,w_225</url><title>avatar</title><link>https://kalipig.github.io</link></image><lastBuildDate>Thu, 15 May 2025 09:29:47 +0000</lastBuildDate><managingEditor>IGpig's Blog</managingEditor><ttl>60</ttl><webMaster>IGpig's Blog</webMaster><item><title>题解：AT_abc243_f [ABC243F] Lottery</title><link>https://kalipig.github.io/post/ti-jie-%EF%BC%9AAT_abc243_f%20%5BABC243F%5D%20Lottery.html</link><description>## abc243f
 
 ### Solution
 
-看到异或，可以很明显想到二进制。</description><guid isPermaLink="true">https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2094E%20Boneca%20Ambalabu.html</guid><pubDate>Thu, 15 May 2025 09:28:20 +0000</pubDate></item><item><title>题解：CF2093G Shorten the Array</title><link>https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2093G%20Shorten%20the%20Array.html</link><description>## CF2093G
+考虑动态规划，$dp_{i,j,k}$ 表示在前 $i$ 个物品中，抽 $j$ 次，有 $k$ 个不同奖品的概率。</description><guid isPermaLink="true">https://kalipig.github.io/post/ti-jie-%EF%BC%9AAT_abc243_f%20%5BABC243F%5D%20Lottery.html</guid><pubDate>Thu, 15 May 2025 09:28:41 +0000</pubDate></item><item><title>题解：CF2094E Boneca Ambalabu</title><link>https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2094E%20Boneca%20Ambalabu.html</link><description>## CF2094E
 
 ### Solution
 
-参考了上面大佬的做法。</description><guid isPermaLink="true">https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2093G%20Shorten%20the%20Array.html</guid><pubDate>Thu, 15 May 2025 09:26:24 +0000</pubDate></item><item><title>题解：CF2093D Skibidi Table</title><link>https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2093D%20Skibidi%20Table.html</link><description>## CF2093D
-
-### Solution
-
-分制模版题，先处理第一个问题。</description><guid isPermaLink="true">https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2093D%20Skibidi%20Table.html</guid><pubDate>Thu, 15 May 2025 09:24:53 +0000</pubDate></item><item><title>题解：CF2093C Simple Repetition</title><link>https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2093C%20Simple%20Repetition.html</link><description>## CF2093C
-
-### Solution
-
-因为是把 $x$ 复制 $k$ 次，所以新的数一定有一个因数是 $x$，那么当 $k=1$ 时，只需要判断 $x$ 是不是质数就可以了。</description><guid isPermaLink="true">https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2093C%20Simple%20Repetition.html</guid><pubDate>Thu, 15 May 2025 09:23:44 +0000</pubDate></item><item><title>题解：CF1679D Toss a Coin to Your Graph...</title><link>https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF1679D%20Toss%20a%20Coin%20to%20Your%20Graph....html</link><description>## CF1679D
+看到异或，可以很明显想到二进制。</description><guid isPermaLink="true">https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2094E%20Boneca%20Ambalabu.html</guid><pubDate>Thu, 15 May 2025 09:28:20 +0000</pubDate></item><item><title>题解：CF1679D Toss a Coin to Your Graph...</title><link>https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF1679D%20Toss%20a%20Coin%20to%20Your%20Graph....html</link><description>## CF1679D
 
 ### Solution
 

@@ -7,21 +7,21 @@
     <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     
     <link rel="icon" href="https://cdn.luogu.com.cn/upload/image_hosting/x3aer81z.png?x-oss-process=image/resize,m_lfit,h_170,w_225">
-<meta name="description" content="## CF2093D
+<meta name="description" content="## abc243f
 
 ### Solution
 
-分制模版题，先处理第一个问题。">
-<meta property="og:title" content="题解：CF2093D Skibidi Table">
-<meta property="og:description" content="## CF2093D
+考虑动态规划，$dp_{i,j,k}$ 表示在前 $i$ 个物品中，抽 $j$ 次，有 $k$ 个不同奖品的概率。">
+<meta property="og:title" content="题解：AT_abc243_f [ABC243F] Lottery">
+<meta property="og:description" content="## abc243f
 
 ### Solution
 
-分制模版题，先处理第一个问题。">
+考虑动态规划，$dp_{i,j,k}$ 表示在前 $i$ 个物品中，抽 $j$ 次，有 $k$ 个不同奖品的概率。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://kalipig.github.io/post/ti-jie-%EF%BC%9ACF2093D%20Skibidi%20Table.html">
+<meta property="og:url" content="https://kalipig.github.io/post/ti-jie-%EF%BC%9AAT_abc243_f%20%5BABC243F%5D%20Lottery.html">
 <meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/x3aer81z.png?x-oss-process=image/resize,m_lfit,h_170,w_225">
-<title>题解：CF2093D Skibidi Table</title>
+<title>题解：AT_abc243_f [ABC243F] Lottery</title>
 <link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
@@ -64,7 +64,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">题解：CF2093D Skibidi Table</h1>
+<h1 class="postTitle">题解：AT_abc243_f [ABC243F] Lottery</h1>
 <div class="title-right">
     <a href="https://kalipig.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -72,7 +72,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/kalipig/kalipig.github.io/issues/22" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/kalipig/kalipig.github.io/issues/30" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -88,112 +88,86 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h2>CF2093D</h2>
+<div class="markdown-body" id="postBody"><h2>abc243f</h2>
 <h3>Solution</h3>
-<p>分制模版题，先处理第一个问题。定义搜索状态 ${dfs}(x,y,l,mn,mx)$ 表示当前在 $(x,y)$ 这个位置，当前块的边长为 $l$，当前块内的最大和最小值 $mx,mn$。</p>
-<p>初始从最大的那个也就是右下角开始。</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">query1</span>(LL x,LL y,LL l,LL mn,LL mx){
-    <span class="pl-k">if</span>(l==<span class="pl-c1">1</span>){<span class="pl-c"><span class="pl-c">//</span>找到</span>
-        cout&lt;&lt;mn&lt;&lt;endl;
-        <span class="pl-k">return</span> ;
-    }
-    LL len=mx-mn+<span class="pl-c1">1</span>;<span class="pl-c"><span class="pl-c">//</span>方便处理</span>
-    <span class="pl-k">if</span>(x&lt;=l/<span class="pl-c1">2</span>&amp;&amp;y&lt;=l/<span class="pl-c1">2</span>){<span class="pl-c"><span class="pl-c">//</span>左上角</span>
-        <span class="pl-c1">query1</span>(x,y,l/<span class="pl-c1">2</span>,mn,mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(x&gt;l/<span class="pl-c1">2</span>&amp;&amp;y&gt;l/<span class="pl-c1">2</span>){<span class="pl-c"><span class="pl-c">//</span>右下角</span>
-        <span class="pl-c1">query1</span>(x-l/<span class="pl-c1">2</span>,y-l/<span class="pl-c1">2</span>,l/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">4</span>,mn+len/<span class="pl-c1">2</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(x&gt;l/<span class="pl-c1">2</span>&amp;&amp;y&lt;=l/<span class="pl-c1">2</span>){<span class="pl-c"><span class="pl-c">//</span>左下角</span>
-        <span class="pl-c1">query1</span>(x-l/<span class="pl-c1">2</span>,y,l/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(x&lt;=l/<span class="pl-c1">2</span>&amp;&amp;y&gt;l/<span class="pl-c1">2</span>){<span class="pl-c"><span class="pl-c">//</span>右上角</span>
-        <span class="pl-c1">query1</span>(x,y-l/<span class="pl-c1">2</span>,l/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>,mx);
-    }
-}</pre></div>
-<p>在第二个问题中只需要加上当前查找的值 $d$ 即可。</p>
-<p>从左上角开始，找范围。</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">query2</span>(LL x,LL y,LL l,LL d,LL mn,LL mx){
-    <span class="pl-k">if</span>(l==<span class="pl-c1">1</span>){
-        cout&lt;&lt;x&lt;&lt;<span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>&lt;&lt;y&lt;&lt;endl;
-        <span class="pl-k">return</span> ;
-    }
-    LL len=mx-mn+<span class="pl-c1">1</span>;
-    <span class="pl-k">if</span>(d&lt;=mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>){
-        <span class="pl-c1">query2</span>(x,y,l/<span class="pl-c1">2</span>,d,mn,mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(d&gt;=mn+len/<span class="pl-c1">4</span>&amp;&amp;d&lt;=mn+len/<span class="pl-c1">2</span>-<span class="pl-c1">1</span>){
-        <span class="pl-c1">query2</span>(x+l/<span class="pl-c1">2</span>,y+l/<span class="pl-c1">2</span>,l/<span class="pl-c1">2</span>,d,mn+len/<span class="pl-c1">4</span>,mn+len/<span class="pl-c1">2</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(d&gt;=mn+len/<span class="pl-c1">2</span>&amp;&amp;d&lt;=mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>-<span class="pl-c1">1</span>){
-        <span class="pl-c1">query2</span>(x+l/<span class="pl-c1">2</span>,y,l/<span class="pl-c1">2</span>,d,mn+len/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(d&gt;=mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>&amp;&amp;d&lt;=mx){
-        <span class="pl-c1">query2</span>(x,y+l/<span class="pl-c1">2</span>,l/<span class="pl-c1">2</span>,d,mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>,mx);
-    }
+<p>考虑动态规划，$dp_{i,j,k}$ 表示在前 $i$ 个物品中，抽 $j$ 次，有 $k$ 个不同奖品的概率。</p>
+<p>预处理一下：</p>
+<ul>
+<li>组合数 $comb_{i,j}$ 表示在从 $i$ 个不同元素中取出 $j$ 个元素的所有组合的个数。</li>
+<li>乘法逆元，这里采用快速幂法（关于为什么不用拓展欧几里得，因为别的地方要有快速幂）。</li>
+</ul>
+<p>初始化：$dp_{0,0,0}=1$（显然）。</p>
+<h5>动态规划过程</h5>
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++){<span class="pl-c"><span class="pl-c">//</span>枚举前i个。</span>
+    <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">0</span>;j&lt;=k;j++){<span class="pl-c"><span class="pl-c">//</span>抽了j次。</span>
+        <span class="pl-k">for</span>(<span class="pl-k">int</span> p=<span class="pl-c1">0</span>;p&lt;=m;p++){<span class="pl-c"><span class="pl-c">//</span>如果不抽第i个，有p个不同奖品的个数。</span>
+            dp[i][j][p]=dp[i-<span class="pl-c1">1</span>][j][p];<span class="pl-c"><span class="pl-c">//</span>不抽i，和上一个一样。</span>
+        }
+     }
+     <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">1</span>;j&lt;=k;j++){<span class="pl-c"><span class="pl-c">//</span>抽了j次。</span>
+        <span class="pl-k">for</span>(<span class="pl-k">int</span> p=<span class="pl-c1">1</span>;p&lt;=m;p++){<span class="pl-c"><span class="pl-c">//</span>有p个不同奖品的个数。</span>
+           <span class="pl-k">for</span>(<span class="pl-k">int</span> q=<span class="pl-c1">1</span>;q&lt;=j;q++){<span class="pl-c"><span class="pl-c">//</span>在j次中，有q次抽到了i,至少一次。</span>
+               LL qt=<span class="pl-c1">qpow</span>(a[i]*<span class="pl-c1">mmi</span>(sum)%mod,q);<span class="pl-c"><span class="pl-c">//</span>q次抽到i,就是抽到一次的概率的q次方。</span>
+               LL way=comb[j][q];<span class="pl-c"><span class="pl-c">//</span>在这j次中，q次抽到i的组合。</span>
+               dp[i][j][p]=(dp[i][j][p]+dp[i-<span class="pl-c1">1</span>][j-q][p-<span class="pl-c1">1</span>]*way%mod*qt%mod)%mod;<span class="pl-c"><span class="pl-c">//</span>不抽i的方案加上抽i的方案，注意取模。</span>
+            }
+         }
+     }
 }</pre></div>
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
 <span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,q,t,pw[<span class="pl-c1">100</span>]={<span class="pl-c1">1</span>};
-<span class="pl-k">void</span> <span class="pl-en">query1</span>(LL x,LL y,LL l,LL mn,LL mx){
-    <span class="pl-k">if</span>(l==<span class="pl-c1">1</span>){
-        cout&lt;&lt;mn&lt;&lt;endl;
-        <span class="pl-k">return</span> ;
-    }
-    LL len=mx-mn+<span class="pl-c1">1</span>;
-    <span class="pl-k">if</span>(x&lt;=l/<span class="pl-c1">2</span>&amp;&amp;y&lt;=l/<span class="pl-c1">2</span>){
-        <span class="pl-c1">query1</span>(x,y,l/<span class="pl-c1">2</span>,mn,mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(x&gt;l/<span class="pl-c1">2</span>&amp;&amp;y&gt;l/<span class="pl-c1">2</span>){
-        <span class="pl-c1">query1</span>(x-l/<span class="pl-c1">2</span>,y-l/<span class="pl-c1">2</span>,l/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">4</span>,mn+len/<span class="pl-c1">2</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(x&gt;l/<span class="pl-c1">2</span>&amp;&amp;y&lt;=l/<span class="pl-c1">2</span>){
-        <span class="pl-c1">query1</span>(x-l/<span class="pl-c1">2</span>,y,l/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(x&lt;=l/<span class="pl-c1">2</span>&amp;&amp;y&gt;l/<span class="pl-c1">2</span>){
-        <span class="pl-c1">query1</span>(x,y-l/<span class="pl-c1">2</span>,l/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>,mx);
+<span class="pl-k">const</span> LL mod=<span class="pl-c1">998244353</span>;
+LL n,m,k,dp[<span class="pl-c1">55</span>][<span class="pl-c1">55</span>][<span class="pl-c1">55</span>]={<span class="pl-c1">1</span>},comb[<span class="pl-c1">55</span>][<span class="pl-c1">55</span>],a[<span class="pl-c1">55</span>],sum;<span class="pl-c"><span class="pl-c">//</span> dp[i][j][k]：考虑前 i 个奖品，抽了 j 次，有 p 个不同奖品的概率</span>
+<span class="pl-k">void</span> <span class="pl-en">combination</span>(){
+    <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;=<span class="pl-c1">50</span>;i++){
+        comb[i][<span class="pl-c1">0</span>]=<span class="pl-c1">1</span>;
+        <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">1</span>;j&lt;=i;j++){
+            comb[i][j]=(comb[i-<span class="pl-c1">1</span>][j]+comb[i-<span class="pl-c1">1</span>][j-<span class="pl-c1">1</span>])%mod;
+        }
     }
 }
-<span class="pl-k">void</span> <span class="pl-en">query2</span>(LL x,LL y,LL l,LL d,LL mn,LL mx){
-    <span class="pl-c"><span class="pl-c">//</span>cout&lt;&lt;x&lt;&lt;' '&lt;&lt;y&lt;&lt;endl;</span>
-    <span class="pl-k">if</span>(l==<span class="pl-c1">1</span>){
-        cout&lt;&lt;x&lt;&lt;<span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>&lt;&lt;y&lt;&lt;endl;
-        <span class="pl-k">return</span> ;
+<span class="pl-k">inline</span> LL <span class="pl-en">qpow</span>(LL x,LL y){
+    LL res=<span class="pl-c1">1</span>;
+    <span class="pl-k">while</span>(y){
+        <span class="pl-k">if</span>(y&amp;<span class="pl-c1">1</span>) res*=x;
+        x*=x;y/=<span class="pl-c1">2</span>;
+        x%=mod,res%=mod;
     }
-    LL len=mx-mn+<span class="pl-c1">1</span>;
-    <span class="pl-k">if</span>(d&lt;=mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>){
-        <span class="pl-c1">query2</span>(x,y,l/<span class="pl-c1">2</span>,d,mn,mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(d&gt;=mn+len/<span class="pl-c1">4</span>&amp;&amp;d&lt;=mn+len/<span class="pl-c1">2</span>-<span class="pl-c1">1</span>){
-        <span class="pl-c1">query2</span>(x+l/<span class="pl-c1">2</span>,y+l/<span class="pl-c1">2</span>,l/<span class="pl-c1">2</span>,d,mn+len/<span class="pl-c1">4</span>,mn+len/<span class="pl-c1">2</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(d&gt;=mn+len/<span class="pl-c1">2</span>&amp;&amp;d&lt;=mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>-<span class="pl-c1">1</span>){
-        <span class="pl-c1">query2</span>(x+l/<span class="pl-c1">2</span>,y,l/<span class="pl-c1">2</span>,d,mn+len/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>-<span class="pl-c1">1</span>);
-    }
-    <span class="pl-k">if</span>(d&gt;=mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>&amp;&amp;d&lt;=mx){
-        <span class="pl-c1">query2</span>(x,y+l/<span class="pl-c1">2</span>,l/<span class="pl-c1">2</span>,d,mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>,mx);
-    }
+    <span class="pl-k">return</span> res;
 }
-<span class="pl-k">int</span> <span class="pl-en">main</span>(){
-    <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=<span class="pl-c1">60</span>;i++) pw[i]=pw[i-<span class="pl-c1">1</span>]*<span class="pl-c1">2</span>;
-    cin&gt;&gt;t;
-    <span class="pl-k">while</span>(t--){
-        cin&gt;&gt;n&gt;&gt;q;
-        <span class="pl-k">while</span>(q--){
-            LL x,y;<span class="pl-k">char</span> c1,c2;
-            cin&gt;&gt;c1&gt;&gt;c2;
-            <span class="pl-k">if</span>(c1==<span class="pl-s"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>){
-                cin&gt;&gt;x&gt;&gt;y;
-                <span class="pl-c1">query1</span>(x,y,pw[n],<span class="pl-c1">1</span>,pw[n*<span class="pl-c1">2</span>]);
-            }<span class="pl-k">else</span> {
-                cin&gt;&gt;x;
-                <span class="pl-c1">query2</span>(<span class="pl-c1">1</span>,<span class="pl-c1">1</span>,pw[n],x,<span class="pl-c1">1</span>,pw[n*<span class="pl-c1">2</span>]);
+<span class="pl-k">inline</span> LL <span class="pl-en">mmi</span>(LL x){
+    <span class="pl-k">return</span> <span class="pl-c1">qpow</span>(x,mod-<span class="pl-c1">2</span>);
+}
+<span class="pl-k">void</span> <span class="pl-en">DP</span>(){
+    <span class="pl-c"><span class="pl-c">//</span>enum i</span>
+    <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++){
+        <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">0</span>;j&lt;=k;j++){
+            <span class="pl-k">for</span>(<span class="pl-k">int</span> p=<span class="pl-c1">0</span>;p&lt;=m;p++){
+                dp[i][j][p]=dp[i-<span class="pl-c1">1</span>][j][p];
+            }
+        }
+        <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">1</span>;j&lt;=k;j++){
+            <span class="pl-k">for</span>(<span class="pl-k">int</span> p=<span class="pl-c1">1</span>;p&lt;=m;p++){
+                <span class="pl-k">for</span>(<span class="pl-k">int</span> q=<span class="pl-c1">1</span>;q&lt;=j;q++){
+                    LL qt=<span class="pl-c1">qpow</span>(a[i]*<span class="pl-c1">mmi</span>(sum)%mod,q);
+                    LL way=comb[j][q];
+                    dp[i][j][p]=(dp[i][j][p]+dp[i-<span class="pl-c1">1</span>][j-q][p-<span class="pl-c1">1</span>]*way%mod*qt%mod)%mod;
+                }
             }
         }
     }
-    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}
+<span class="pl-k">int</span> <span class="pl-en">main</span>(){
+    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;
+    <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++){
+        cin&gt;&gt;a[i];sum+=a[i];
+    }
+    <span class="pl-c1">combination</span>();
+    <span class="pl-c1">DP</span>();
+    cout&lt;&lt;dp[n][k][m];
+    <span class="pl-k">return</span>  <span class="pl-c1">0</span>;
 }</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
