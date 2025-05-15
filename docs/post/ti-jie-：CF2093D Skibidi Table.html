@@ -72,7 +72,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/kalipig/kalipig.github.io/issues/22" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/kalipig/kalipig.github.io/issues/27" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -90,7 +90,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <div id="content">
 <div class="markdown-body" id="postBody"><h2>CF2093D</h2>
 <h3>Solution</h3>
-<p>分制模版题，先处理第一个问题。定义搜索状态 ${dfs}(x,y,l,mn,mx)$ 表示当前在 $(x,y)$ 这个位置，当前块的边长为 $l$，当前块内的最大和最小值 $mx,mn$。</p>
+<p>分制模版题，先处理第一个问题。定义搜索状态 $\operatorname{dfs}(x,y,l,mn,mx)$ 表示当前在 $(x,y)$ 这个位置，当前块的边长为 $l$，当前块内的最大和最小值 $mx,mn$。</p>
 <p>初始从最大的那个也就是右下角开始。</p>
 <div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">query1</span>(LL x,LL y,LL l,LL mn,LL mx){
     <span class="pl-k">if</span>(l==<span class="pl-c1">1</span>){<span class="pl-c"><span class="pl-c">//</span>找到</span>
