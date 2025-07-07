@@ -95,7 +95,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>只考虑边权大于 ans 的边，则图一定是一个二分图。</li>
 <li></li>
 </ul>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/f2be7356be83218edae871348e82e4535bab53977bd362958b3ba1a3c1cd7fc0/68747470733a2f2f6f6977696b692e636f6d2f67726170682f696d616765732f62692d67726170682e737667"><img src="https://camo.githubusercontent.com/f2be7356be83218edae871348e82e4535bab53977bd362958b3ba1a3c1cd7fc0/68747470733a2f2f6f6977696b692e636f6d2f67726170682f696d616765732f62692d67726170682e737667" alt="" data-canonical-src="https://oiwiki.com/graph/images/bi-graph.svg" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/f2be7356be83218edae871348e82e4535bab53977bd362958b3ba1a3c1cd7fc0/68747470733a2f2f6f6977696b692e636f6d2f67726170682f696d616765732f62692d67726170682e737667"><img src="https://camo.githubusercontent.com/f2be7356be83218edae871348e82e4535bab53977bd362958b3ba1a3c1cd7fc0/68747470733a2f2f6f6977696b692e636f6d2f67726170682f696d616765732f62692d67726170682e737667" alt="" data-canonical-src="https://oiwiki.com/graph/images/bi-graph.svg" style="max-width: 100%;"></a></p>
 <p>现在我们知道，要判断一个答案是否合法，<strong>只要把大于答案的边连起来，判断是否为一个二分图</strong>。<br>
 介绍一个 dfs 判断二分图的方法：</p>
 <div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">bool</span> <span class="pl-en">dfs</span>(LL v, LL c){
