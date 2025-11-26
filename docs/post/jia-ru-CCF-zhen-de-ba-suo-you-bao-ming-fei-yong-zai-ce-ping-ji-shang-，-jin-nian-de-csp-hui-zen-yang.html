@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark-blue" data-light-theme="dark" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://lh3.googleusercontent.com/a/ACg8ocKMq2XrKTfZzYmaKe157BCXVlbHnmu0v7JXcoKOa66mAV3rOPs=s288-c-no">
+<meta name="description" content="相信参加过 ccf 举办的比赛的大家都一直有一个问题，就是为什么一些看起来毫无意义的问题要要求你必须在一秒内解决，即使在实际的工程中可能不会有这么死的限制。">
+<meta property="og:title" content="假如CCF真的把所有报名费用在测评机上，今年的csp会怎样">
+<meta property="og:description" content="相信参加过 ccf 举办的比赛的大家都一直有一个问题，就是为什么一些看起来毫无意义的问题要要求你必须在一秒内解决，即使在实际的工程中可能不会有这么死的限制。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kalipig.github.io/post/jia-ru-CCF-zhen-de-ba-suo-you-bao-ming-fei-yong-zai-ce-ping-ji-shang-%EF%BC%8C-jin-nian-de-csp-hui-zen-yang.html">
+<meta property="og:image" content="https://lh3.googleusercontent.com/a/ACg8ocKMq2XrKTfZzYmaKe157BCXVlbHnmu0v7JXcoKOa66mAV3rOPs=s288-c-no">
+<title>假如CCF真的把所有报名费用在测评机上，今年的csp会怎样</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">假如CCF真的把所有报名费用在测评机上，今年的csp会怎样</h1>
+<div class="title-right">
+    <a href="https://kalipig.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/kalipig/kalipig.github.io/issues/59" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题"style="display:none;">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>相信参加过 ccf 举办的比赛的大家都一直有一个问题，就是为什么一些看起来毫无意义的问题要要求你必须在一秒内解决，即使在实际的工程中可能不会有这么死的限制。而且你还交了几百块钱去比赛。<br>
+只有一个原因就是<strong>测评机跑太慢了</strong>！</p>
+<p>那么如果 ccf 把所有报名费都花在测评机上，买市面上能买到的最好的测评机来跑，钱够不够，会怎样，今年的 CSP-S 会有多简单？</p>
+<h2>测评机选择</h2>
+<p>今年用的是：Intel Core Ultra 9 285K CPU @ 3.70 GHz（关闭睿频与能效核），内存为96 GB。<br>
+理论极限为多核性能（理想情况）：如果程序能完美并行，8个核心的总性能  $=5.55 \times 10^9 \times 8 \approx 4.44 \times 10^{10}$。<br>
+实际能跑个 $5\times 10^8$ 不错了。</p>
+<p>但是想要完成每一个 OI 选手的梦想 $10^6$ 跑 $n^2$<br>
+还差的非常远。</p>
+<h3>该选择哪款芯片呢？</h3>
+<p>首先是需要能买到，中国的芯片产业尚在发展，还是需要去美国购买。那么根据最新的中国香港海关信息，CPU 关税代码和计算如下：<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/0eed3fff417982d216b5beda3b15241dd8605661b1acb2afc52dff2229cd6d56/68747470733a2f2f796f756b65312e70696375692e636e2f73312f323032352f31312f31312f363931326562623564653431352e706e67"><img src="https://camo.githubusercontent.com/0eed3fff417982d216b5beda3b15241dd8605661b1acb2afc52dff2229cd6d56/68747470733a2f2f796f756b65312e70696375692e636e2f73312f323032352f31312f31312f363931326562623564653431352e706e67" alt="" data-canonical-src="https://youke1.picui.cn/s1/2025/11/11/6912ebb5de415.png" style="max-width: 100%;"></a><br>
+ccf 今年用的芯片在香港买单价约为 $4125\text{HKD}$，当然大陆的关税会高一些。所以最后的单价在 $6000\text{CHR}$ 左右。</p>
+<p>虽然 Intel 系列是市场主流，但是不得不承认的是，苹果公司的 M 系列芯片除了系统不适配以外确实有更多优点，在<a href="https://www.topcpu.net/cpu-r/geekbench-6-single-core" rel="nofollow">性能排名</a>上也更有优势，前十占了八个，虽然最强的 M5 和 M4 Ultra 现在还没有正式放到机器上售卖。</p>
+<p>我们能买到的就是苹果公司最新推出的 M3 Ultra。<br>
+那么根据 <a href="https://www.apple.com.cn/newsroom/2025/03/apple-reveals-m3-ultra-taking-apple-silicon-to-a-new-extreme/" rel="nofollow">Apple官网的数据</a>（下为原文）：</p>
+<hr>
+<blockquote>
+<p>M3 Ultra 具备 Mac 芯片迄今最强性能，同时保持了 Apple 芯片领先业界的能效表现。M3 Ultra 配备最多 32 核中央处理器，包括 24 颗性能核心和 8 颗能效核心。<br>
+M3 Ultra 为 Mac Studio 带来对雷雳 5 端口的支持，数据传输速度最高可达 120 Gb/s，Mac Studio 的雷雳 5 端口为专业用户带来更快的数据传输速度。雷雳 5 还可连接多台 Mac Studio 系统，以实现挑战内容创作与计算机科学探索极限的工作流。</p>
+</blockquote>
+<hr>
+<p><strong>内存最高达到了 512GB，32 核 (24 性能核+8 能效核)搭配上内存带宽最高可达 2.5TB/s</strong>，在性能方面很明显优于酷睿，而高带宽利于数据频繁读写，故在常数特别是内存读取方面有巨大优势。</p>
+<p>根据 Deepseek 推算，每秒计算理论值可以达到 $5\times10^{10}$，实际可以达到 $1\times 10^{10}$。</p>
+<p>当然 M3 Ultra 显然不能单独买，所以现在能买到的就是搭载 M3 Ultra 的 Mac Studio，官网售价 $16999\text{CNR}$。</p>
+<p>但是这样还是跑不到 $10^{12}$。</p>
+<p>既然一台机器跑不到，还有一个东西叫<strong>多线程分布式计算</strong>。<br>
+也就是大家平时听说的大公司的算力，当然他们比 ccf 有钱多了。</p>
+<p>粗略估计我们至少还需要 $100$ 台 Mac Studio 来跑，但是算力可不是简单的相加！</p>
+<p>如何将 $n^2$ 个任务公平、高效地分配给 $100$ 个 CPU ? 需要设计复杂的分布式任务调度系统（如模仿 MapReduce）。调度开销可能占整个计算时间的很大一部分。算法通常需要访问整个或大部分数据集。例如，一个处理 $10^6$ 大小数组的双重循环。	需要将整个数组（至少是 4MB 的 int 数组）分发给所有 $100$ 台机器。</p>
+<p>但是别忘了 Mac Studio 就是为了多线程来跑的。<br>
+算上交换损失可能需要 $500$ 台。</p>
+<h3>怎么给 ccf 搭建测评机？</h3>
+<p>首先要买 $500$ 台 Mac Studio，大约要 $7,480,000\text{CNR}$，布置机房，散热和电力等需要 $1,200,000\text{CNR}$，高速交换机和光纤可以将机器之间的交换做到最小，需要 $700,000\text{CNR}$，硬件总共需要 $8,300,000\text{CNR}$。</p>
+<p>然后可以找美国的专业公司定制一套合适的测评系统，平均价格在 $700,000\text{CNR}$，再开发一套基于 ARM 架构下的 NOI Linux 则需要约 $105,000\text{CNR}$，所以软件方面总计 $805,000\text{CNR}$。</p>
+<p>总花费为 $9,105,000\text{CNR}$。</p>
+<h3>ccf 一年收多少报名费？</h3>
+<p>总参加人数约为 $150,000$ 人，按报名费 $100+560=660\text{CNR}$ 就是 $105,000,000$，这一套测评机初期至少可以用 $5$ 年，一年只用十几次，首次投入按 $9,000,000\text{CNR}$ 计算，则 <code class="notranslate">ccf</code> 只需要拿出 $12%$ 的五年的报名费。</p>
+<p>只需要 $12%$ 报名费就可以了！</p>
+<p>但是我们对于它实际上把钱花哪里去了不太清楚，<del>可能</del>一定是提高比赛质量，推动信息学发展，或者教师培训和考点布置。</p>
+<h3>如果真的能跑 $10^{12}$
+</h3>
+<p>那来看看今年的 CSP-S 会怎么样。</p>
+<h4>第一题</h4>
+<p>直接枚举第一个部门多少人，第二个部门多少人，然后第三个部门就是剩下的，所以 $\mathcal{O}(n^2\log n)$ 也就是 $10^{11}$ 随便跑！！！</p>
+<h4>第二题</h4>
+<p>直接 $2^k$ 枚举选择然后建边跑最小生成树，$2.25\times 10^{10}$ 随便跑！</p>
+<h4>第三题</h4>
+<p>只需要最简单的字符串哈希处理一下，然后每次询问直接跑，刚好 $10^{12}$ 也能跑！</p>
+<h4>第四题</h4>
+<p>直接暴力动态规划，设 $dp_{i,j}$ 表示前 $i$ 天已经有 $j$ 个人放弃最后还能剩下的最大人数，状态是 $n^2$，每次转移需要考虑后面的人，总复杂度 $\mathcal{O}(n^2m)$，但是 $n$ 才 $500$ 所以总共 $1.25\times 10^8$ 随便跑！！！</p>
+<p><del>我来我也能 AK 了。</del></p>
+<p>本文基于实际情况合理推测，请勿尝试。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://kalipig.github.io">IGpig's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","kalipig/kalipig.github.io");
+    script.setAttribute("issue-term","title");
+    
+    script.setAttribute("theme","dark-blue");
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+<script>MathJax = {tex: {inlineMath: [["$", "$"]]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</html>
