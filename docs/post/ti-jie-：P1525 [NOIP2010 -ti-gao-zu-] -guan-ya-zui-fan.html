@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://kalipig.github.io/post/ti-jie-%EF%BC%9AP1525%20%5BNOIP2010%20-ti-gao-zu-%5D%20-guan-ya-zui-fan.html">
 <meta property="og:image" content="https://lh3.googleusercontent.com/a/ACg8ocKMq2XrKTfZzYmaKe157BCXVlbHnmu0v7JXcoKOa66mAV3rOPs=s288-c-no">
 <title>题解：P1525 [NOIP2010 提高组] 关押罪犯</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
 </head>
@@ -98,38 +98,36 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a860a4c92588f1b4b38983037c0d475eded195592d92f99451a314fbaec099e8/68747470733a2f2f6f6977696b692e636f6d2f67726170682f696d616765732f62692d67726170682e737667"><img src="https://camo.githubusercontent.com/a860a4c92588f1b4b38983037c0d475eded195592d92f99451a314fbaec099e8/68747470733a2f2f6f6977696b692e636f6d2f67726170682f696d616765732f62692d67726170682e737667" alt="" data-canonical-src="https://oiwiki.com/graph/images/bi-graph.svg" style="max-width: 100%;"></a></p>
 <p>现在我们知道，要判断一个答案是否合法，<strong>只要把大于答案的边连起来，判断是否为一个二分图</strong>。<br>
 介绍一个 dfs 判断二分图的方法：</p>
-<pre lang="cpp" class="notranslate"><code class="notranslate">bool dfs(LL v, LL c){
-    color[v] = c;    //将当前顶点涂色
-    for(int i = 0; i &lt; n; i++){    //遍历所有相邻顶点，即连着的点
-        if(edge[v][i] == 1){    //如果顶点存在
-            if(color[i] == c)    //如果颜色重复，就返回false
-                return false;
-            if(color[i] == 0 &amp;&amp; !dfs(i,-c))    //如果还未涂色，就染上相反的颜色-c,并dfs这个顶点，进入下一层
-                return false;   //返回false
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">bool</span> <span class="pl-en">dfs</span>(LL v, LL c){
+    color[v] = c;    <span class="pl-c"><span class="pl-c">//</span>将当前顶点涂色</span>
+    <span class="pl-k">for</span>(<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; n; i++){    <span class="pl-c"><span class="pl-c">//</span>遍历所有相邻顶点，即连着的点</span>
+        <span class="pl-k">if</span>(edge[v][i] == <span class="pl-c1">1</span>){    <span class="pl-c"><span class="pl-c">//</span>如果顶点存在</span>
+            <span class="pl-k">if</span>(color[i] == c)    <span class="pl-c"><span class="pl-c">//</span>如果颜色重复，就返回false</span>
+                <span class="pl-k">return</span> <span class="pl-c1">false</span>;
+            <span class="pl-k">if</span>(color[i] == <span class="pl-c1">0</span> &amp;&amp; !<span class="pl-c1">dfs</span>(i,-c))    <span class="pl-c"><span class="pl-c">//</span>如果还未涂色，就染上相反的颜色-c,并dfs这个顶点，进入下一层</span>
+                <span class="pl-k">return</span> <span class="pl-c1">false</span>;   <span class="pl-c"><span class="pl-c">//</span>返回false</span>
         }
     }
-    return true;   //如果所有顶点涂完色，并且没有出现同色的相邻顶点，就返回true
+    <span class="pl-k">return</span> <span class="pl-c1">true</span>;   <span class="pl-c"><span class="pl-c">//</span>如果所有顶点涂完色，并且没有出现同色的相邻顶点，就返回true</span>
 }
-
-</code></pre>
+</pre></div>
 <p>至于答案的话，采用二分答案的方法：</p>
-<pre lang="cpp" class="notranslate"><code class="notranslate">int main(){
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">int</span> <span class="pl-en">main</span>(){
     cin&gt;&gt;n&gt;&gt;m;
-    for(int i=1;i&lt;=m;i++){
-        cin&gt;&gt;e[i].x&gt;&gt;e[i].y&gt;&gt;e[i].w;//按边存，方便排序
+    <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=m;i++){
+        cin&gt;&gt;e[i].<span class="pl-smi">x</span>&gt;&gt;e[i].<span class="pl-smi">y</span>&gt;&gt;e[i].<span class="pl-smi">w</span>;<span class="pl-c"><span class="pl-c">//</span>按边存，方便排序</span>
     }
-    sort(e+1,e+m+1);
-    LL l=0,r=m,mid;
-    while(l&lt;r-1){
-        mid=(l+r)/2;
-        if(check(mid))r=mid;
-        else l=mid;
+    <span class="pl-c1">sort</span>(<span class="pl-c1">e+1</span>,e+m+<span class="pl-c1">1</span>);
+    LL l=<span class="pl-c1">0</span>,r=m,mid;
+    <span class="pl-k">while</span>(l&lt;r-<span class="pl-c1">1</span>){
+        mid=(l+r)/<span class="pl-c1">2</span>;
+        <span class="pl-k">if</span>(<span class="pl-c1">check</span>(mid))r=mid;
+        <span class="pl-k">else</span> l=mid;
     }
-    if(m==1) cout&lt;&lt;0;//特判
-    else cout&lt;&lt;e[r].w;
-    return 0;
-}
-</code></pre>
+    <span class="pl-k">if</span>(m==<span class="pl-c1">1</span>) cout&lt;&lt;<span class="pl-c1">0</span>;<span class="pl-c"><span class="pl-c">//</span>特判</span>
+    <span class="pl-k">else</span> cout&lt;&lt;e[r].<span class="pl-smi">w</span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
 <h3>代码</h3>
 <p>怕大家看不懂，参考了 <a class="user-mention notranslate" data-hovercard-type="user" data-hovercard-url="/users/FY0123/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="https://github.com/FY0123">@FY0123</a> 大佬的代码重写了一遍，自己的码风不太好。</p>
 <pre class="notranslate"><code class="notranslate">#include&lt;bits/stdc++.h&gt;
