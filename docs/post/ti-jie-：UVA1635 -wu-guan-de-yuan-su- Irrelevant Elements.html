@@ -104,16 +104,16 @@ $$v_{t,{ \binom{n-1}{i-1} }}=v_{t,n-1} - v_{t,i-1} - v_{t,n-1-j} = x$$<br>
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL = <span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,m;
-vector&lt;pair&lt;LL,LL&gt; &gt; g;
-vector&lt;LL&gt; ans;
-LL v[<span class="pl-c1">1005</span>][<span class="pl-c1">100005</span>];  
+<span class="pl-k">using</span> <span class="pl-c1">LL</span> = <span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,m;
+vector&lt;pair&lt;<span class="pl-c1">LL</span>,<span class="pl-c1">LL</span>&gt; &gt; g;
+vector&lt;<span class="pl-c1">LL</span>&gt; ans;
+<span class="pl-c1">LL</span> v[<span class="pl-c1">1005</span>][<span class="pl-c1">100005</span>];  
 <span class="pl-k">int</span> <span class="pl-en">main</span>(){
     <span class="pl-c1">ios::sync_with_stdio</span>(<span class="pl-c1">false</span>); cin.<span class="pl-c1">tie</span>(<span class="pl-c1">nullptr</span>);cout.<span class="pl-c1">tie</span>(<span class="pl-c1">nullptr</span>);
     cin&gt;&gt;n&gt;&gt;m;
-    LL x=m;
-    <span class="pl-k">for</span>(<span class="pl-k">int</span> p=<span class="pl-c1">2</span>; (LL)p*p&lt;=x; p++){
+    <span class="pl-c1">LL</span> x=m;
+    <span class="pl-k">for</span>(<span class="pl-k">int</span> p=<span class="pl-c1">2</span>; (<span class="pl-c1">LL</span>)p*p&lt;=x; p++){
         <span class="pl-k">if</span>(x%p==<span class="pl-c1">0</span>){
           <span class="pl-k">int</span> e=<span class="pl-c1">0</span>;
           <span class="pl-k">while</span>(x%p==<span class="pl-c1">0</span>){ x/=p; e++; }
@@ -121,12 +121,12 @@ LL v[<span class="pl-c1">1005</span>][<span class="pl-c1">100005</span>];
         }
     }
     <span class="pl-k">if</span>(x&gt;<span class="pl-c1">1</span>) g.<span class="pl-c1">push_back</span>({x,<span class="pl-c1">1</span>});
-    LL len=g.<span class="pl-c1">size</span>();
+    <span class="pl-c1">LL</span> len=g.<span class="pl-c1">size</span>();
     <span class="pl-k">for</span>(<span class="pl-k">int</span> t=<span class="pl-c1">0</span>; t&lt;len; t++){
-      LL p=g[t].<span class="pl-smi">first</span>;
+      <span class="pl-c1">LL</span> p=g[t].<span class="pl-smi">first</span>;
       v[t][<span class="pl-c1">0</span>]=<span class="pl-c1">0</span>;
       <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>; i&lt;n; i++){
-        LL c=<span class="pl-c1">0</span>, x=i;
+        <span class="pl-c1">LL</span> c=<span class="pl-c1">0</span>, x=i;
         <span class="pl-k">while</span>(x%p==<span class="pl-c1">0</span>){ x/=p; c++; }
         v[t][i]=v[t][i-<span class="pl-c1">1</span>]+c;
       }
@@ -134,13 +134,13 @@ LL v[<span class="pl-c1">1005</span>][<span class="pl-c1">100005</span>];
     <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">0</span>; j&lt;n; j++){
       <span class="pl-k">bool</span> flag=<span class="pl-c1">true</span>;
       <span class="pl-k">for</span>(<span class="pl-k">int</span> t=<span class="pl-c1">0</span>; t&lt;len; t++){
-        LL tot = v[t][n-<span class="pl-c1">1</span>] - v[t][j] - v[t][n-<span class="pl-c1">1</span>-j];
+        <span class="pl-c1">LL</span> tot = v[t][n-<span class="pl-c1">1</span>] - v[t][j] - v[t][n-<span class="pl-c1">1</span>-j];
         <span class="pl-k">if</span>(tot&lt;g[t].<span class="pl-smi">second</span>){ flag=<span class="pl-c1">0</span>; <span class="pl-k">break</span>; }
       }
       <span class="pl-k">if</span>(flag) ans.<span class="pl-c1">push_back</span>(j+<span class="pl-c1">1</span>);
     }
     cout&lt;&lt;ans.<span class="pl-c1">size</span>()&lt;&lt;endl;
-    <span class="pl-k">for</span>(LL i:ans) cout&lt;&lt;i&lt;&lt;<span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span>;
+    <span class="pl-k">for</span>(<span class="pl-c1">LL</span> i:ans) cout&lt;&lt;i&lt;&lt;<span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span>;
     <span class="pl-k">return</span> <span class="pl-c1">0</span>;
 }
 </pre></div></div>

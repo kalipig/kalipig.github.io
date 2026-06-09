@@ -107,12 +107,12 @@ ${MEX}({a_1,a_2,a_3\dots a_n})$ 在所有这样的数组中最大化。</li>
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,x,t,mex;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,x,t,mex;
 <span class="pl-k">int</span> <span class="pl-en">main</span>(){
     cin&gt;&gt;t;
     <span class="pl-k">while</span>(t--){
-        LL tmp=<span class="pl-c1">0</span>;
+        <span class="pl-c1">LL</span> tmp=<span class="pl-c1">0</span>;
         cin&gt;&gt;n&gt;&gt;x;
         <span class="pl-k">for</span>(mex=<span class="pl-c1">0</span>;mex&lt;=n-<span class="pl-c1">1</span>;mex++){
             <span class="pl-k">if</span>((mex&amp;x)!=mex) <span class="pl-k">break</span>;

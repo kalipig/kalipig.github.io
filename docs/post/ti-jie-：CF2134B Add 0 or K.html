@@ -107,11 +107,11 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 #<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>queue<span class="pl-pds">&gt;</span></span>
 #<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iomanip<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,k,a[<span class="pl-c1">100005</span>];
-LL <span class="pl-en">invv</span>(LL a, LL m)
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,k,a[<span class="pl-c1">100005</span>];
+<span class="pl-c1">LL</span> <span class="pl-en">invv</span>(<span class="pl-c1">LL</span> a, <span class="pl-c1">LL</span> m)
 {
-    <span class="pl-k">for</span>(LL x=<span class="pl-c1">1</span>;x&lt;m;x++)
+    <span class="pl-k">for</span>(<span class="pl-c1">LL</span> x=<span class="pl-c1">1</span>;x&lt;m;x++)
     {
         <span class="pl-k">if</span>((a*x)%m==<span class="pl-c1">1</span>)
         {
@@ -120,12 +120,12 @@ LL <span class="pl-en">invv</span>(LL a, LL m)
     }
     <span class="pl-k">return</span> <span class="pl-c1">1</span>;
 }
-<span class="pl-k">inline</span> LL <span class="pl-en">gcd</span>(LL x,LL y){
+<span class="pl-k">inline</span> <span class="pl-c1">LL</span> <span class="pl-en">gcd</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> y){
     <span class="pl-k">if</span>(!y) <span class="pl-k">return</span> x;
     <span class="pl-k">return</span> <span class="pl-c1">gcd</span>(y,x%y);
 }
 <span class="pl-k">void</span> <span class="pl-en">solve</span>(){
-    LL g=<span class="pl-c1">2</span>;
+    <span class="pl-c1">LL</span> g=<span class="pl-c1">2</span>;
     cin&gt;&gt;n&gt;&gt;k;
     <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;n;i++)
     {
@@ -151,7 +151,7 @@ LL <span class="pl-en">invv</span>(LL a, LL m)
     {
         g++;
     }
-    LL ink=<span class="pl-c1">invv</span>(k%g,g);
+    <span class="pl-c1">LL</span> ink=<span class="pl-c1">invv</span>(k%g,g);
     <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;n;i++)
     {
         cout&lt;&lt;a[i]+((((g-a[i]%g)%g)*ink)%g)*k&lt;&lt;<span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span>;

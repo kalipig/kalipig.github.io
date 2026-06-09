@@ -126,22 +126,22 @@ ${id}$ 是通过 ${ask}(k)$ 得到的索引。</li>
 <p>别忘了，如果不够 $k$ 个，就直接算总和 $sum_1$。</p>
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
-<span class="pl-k">using</span> LL = <span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span> = <span class="pl-k">long</span> <span class="pl-k">long</span>;
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">const</span> LL N = (LL)(<span class="pl-c1">1e6</span>) + <span class="pl-c1">5</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> N = (<span class="pl-c1">LL</span>)(<span class="pl-c1">1e6</span>) + <span class="pl-c1">5</span>;
 <span class="pl-k">struct</span> <span class="pl-en">seg_tree</span> {
-    #<span class="pl-k">define</span> <span class="pl-en">get_mid</span> LL mid=(l+r)/<span class="pl-c1">2</span>
+    #<span class="pl-k">define</span> <span class="pl-en">get_mid</span> <span class="pl-c1">LL</span> mid=(l+r)/<span class="pl-c1">2</span>
 
     <span class="pl-k">struct</span> <span class="pl-en">node</span> {
-        LL num, cost;
+        <span class="pl-c1">LL</span> num, cost;
     }tr[<span class="pl-c1">4000005</span>];
 
-    <span class="pl-k">inline</span> <span class="pl-k">void</span> <span class="pl-en">pushup</span>(LL x) { 
+    <span class="pl-k">inline</span> <span class="pl-k">void</span> <span class="pl-en">pushup</span>(<span class="pl-c1">LL</span> x) { 
         tr[x].<span class="pl-smi">num</span> = tr[x &lt;&lt; <span class="pl-c1">1</span>].<span class="pl-smi">num</span> + tr[x &lt;&lt; <span class="pl-c1">1</span> | <span class="pl-c1">1</span>].<span class="pl-smi">num</span>;
         tr[x].<span class="pl-smi">cost</span> = tr[x &lt;&lt; <span class="pl-c1">1</span>].<span class="pl-smi">cost</span> + tr[x &lt;&lt; <span class="pl-c1">1</span> | <span class="pl-c1">1</span>].<span class="pl-smi">cost</span>;
     }
 
-    <span class="pl-k">void</span> <span class="pl-en">update</span>(LL d, LL L, LL x, LL l, LL r) {
+    <span class="pl-k">void</span> <span class="pl-en">update</span>(<span class="pl-c1">LL</span> d, <span class="pl-c1">LL</span> L, <span class="pl-c1">LL</span> x, <span class="pl-c1">LL</span> l, <span class="pl-c1">LL</span> r) {
         <span class="pl-k">if</span> (l == r) {
             tr[x].<span class="pl-smi">num</span> += d;
             tr[x].<span class="pl-smi">cost</span> = tr[x].<span class="pl-smi">num</span> * l;
@@ -153,27 +153,27 @@ ${id}$ 是通过 ${ask}(k)$ 得到的索引。</li>
         <span class="pl-c1">pushup</span>(x);
     }
 
-    LL <span class="pl-en">query_num</span>(LL L, LL R, LL x, LL l, LL r) {
+    <span class="pl-c1">LL</span> <span class="pl-en">query_num</span>(<span class="pl-c1">LL</span> L, <span class="pl-c1">LL</span> R, <span class="pl-c1">LL</span> x, <span class="pl-c1">LL</span> l, <span class="pl-c1">LL</span> r) {
         <span class="pl-k">if</span> (L &gt; R) <span class="pl-k">return</span> <span class="pl-c1">0</span>;
         <span class="pl-k">if</span> (L &lt;= l &amp;&amp; r &lt;= R) <span class="pl-k">return</span> tr[x].<span class="pl-smi">num</span>;
         get_mid;
-        LL res = <span class="pl-c1">0</span>;
+        <span class="pl-c1">LL</span> res = <span class="pl-c1">0</span>;
         <span class="pl-k">if</span> (L &lt;= mid) res += <span class="pl-c1">query_num</span>(L, R, x &lt;&lt; <span class="pl-c1">1</span>, l, mid);
         <span class="pl-k">if</span> (R &gt; mid) res += <span class="pl-c1">query_num</span>(L, R, x &lt;&lt; <span class="pl-c1">1</span> | <span class="pl-c1">1</span>, mid + <span class="pl-c1">1</span>, r);
         <span class="pl-k">return</span> res;
     }
 
-    LL <span class="pl-en">query_sum</span>(LL L, LL R, LL x, LL l, LL r) {
+    <span class="pl-c1">LL</span> <span class="pl-en">query_sum</span>(<span class="pl-c1">LL</span> L, <span class="pl-c1">LL</span> R, <span class="pl-c1">LL</span> x, <span class="pl-c1">LL</span> l, <span class="pl-c1">LL</span> r) {
         <span class="pl-k">if</span> (L &gt; R) <span class="pl-k">return</span> <span class="pl-c1">0</span>;
         <span class="pl-k">if</span> (L &lt;= l &amp;&amp; r &lt;= R) <span class="pl-k">return</span> tr[x].<span class="pl-smi">cost</span>;
         get_mid;
-        LL res = <span class="pl-c1">0</span>;
+        <span class="pl-c1">LL</span> res = <span class="pl-c1">0</span>;
         <span class="pl-k">if</span> (L &lt;= mid) res += <span class="pl-c1">query_sum</span>(L, R, x &lt;&lt; <span class="pl-c1">1</span>, l, mid);
         <span class="pl-k">if</span> (R &gt; mid) res += <span class="pl-c1">query_sum</span>(L, R, x &lt;&lt; <span class="pl-c1">1</span> | <span class="pl-c1">1</span>, mid + <span class="pl-c1">1</span>, r);
         <span class="pl-k">return</span> res;
     }
 
-    LL <span class="pl-en">ask</span>(LL k, LL x, LL l, LL r) {
+    <span class="pl-c1">LL</span> <span class="pl-en">ask</span>(<span class="pl-c1">LL</span> k, <span class="pl-c1">LL</span> x, <span class="pl-c1">LL</span> l, <span class="pl-c1">LL</span> r) {
         <span class="pl-k">if</span> (l == r) <span class="pl-k">return</span> r;
         get_mid;
         <span class="pl-k">if</span> (k &lt;= tr[x &lt;&lt; <span class="pl-c1">1</span>].<span class="pl-smi">num</span>) <span class="pl-k">return</span> <span class="pl-c1">ask</span>(k, x &lt;&lt; <span class="pl-c1">1</span>, l, mid);
@@ -181,8 +181,8 @@ ${id}$ 是通过 ${ask}(k)$ 得到的索引。</li>
     }
 }tree;
 
-LL n, k, q, l, r, c, p, P;
-vector&lt;pair&lt;LL, LL&gt;&gt; op[N];
+<span class="pl-c1">LL</span> n, k, q, l, r, c, p, P;
+vector&lt;pair&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt;&gt; op[N];
 
 <span class="pl-k">int</span> <span class="pl-en">main</span>() {
     cin &gt;&gt; n &gt;&gt; k &gt;&gt; q;
@@ -192,12 +192,12 @@ vector&lt;pair&lt;LL, LL&gt;&gt; op[N];
         op[r + <span class="pl-c1">1</span>].<span class="pl-c1">push_back</span>({p, -c});
         P = <span class="pl-c1">max</span>(P, p);
     }
-    LL ans = <span class="pl-c1">0</span>;
+    <span class="pl-c1">LL</span> ans = <span class="pl-c1">0</span>;
     <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
         <span class="pl-k">for</span> (<span class="pl-k">auto</span> j : op[i]) tree.<span class="pl-c1">update</span>(j.<span class="pl-smi">second</span>, j.<span class="pl-smi">first</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, P);
         <span class="pl-k">if</span> (tree.<span class="pl-smi">tr</span>[<span class="pl-c1">1</span>].<span class="pl-smi">num</span> &lt;= k) ans += tree.<span class="pl-smi">tr</span>[<span class="pl-c1">1</span>].<span class="pl-smi">cost</span>;
         <span class="pl-k">else</span> {
-            LL id = tree.<span class="pl-c1">ask</span>(k, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, P);
+            <span class="pl-c1">LL</span> id = tree.<span class="pl-c1">ask</span>(k, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, P);
             ans += tree.<span class="pl-c1">query_sum</span>(<span class="pl-c1">1</span>, id - <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, P) + (k - tree.<span class="pl-c1">query_num</span>(<span class="pl-c1">1</span>, id - <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, P)) * id;
         }
     }

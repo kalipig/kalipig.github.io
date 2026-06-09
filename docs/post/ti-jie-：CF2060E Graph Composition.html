@@ -102,13 +102,13 @@ $cnt1/2$：本来就有的边|需要删的边。</li>
 <p>具体过程见注释。</p>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL t,n,m1,m2,ans,a[<span class="pl-c1">500005</span>],b[<span class="pl-c1">500005</span>],fag[<span class="pl-c1">500005</span>],faf[<span class="pl-c1">500005</span>],hg[<span class="pl-c1">500005</span>],hf[<span class="pl-c1">500005</span>],cnt1,cnt2;
-LL <span class="pl-en">findf</span>(LL x){
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> t,n,m1,m2,ans,a[<span class="pl-c1">500005</span>],b[<span class="pl-c1">500005</span>],fag[<span class="pl-c1">500005</span>],faf[<span class="pl-c1">500005</span>],hg[<span class="pl-c1">500005</span>],hf[<span class="pl-c1">500005</span>],cnt1,cnt2;
+<span class="pl-c1">LL</span> <span class="pl-en">findf</span>(<span class="pl-c1">LL</span> x){
     <span class="pl-k">if</span>(faf[x]==x) <span class="pl-k">return</span> x;
     <span class="pl-k">return</span> faf[x]=<span class="pl-c1">findf</span>(faf[x]);
 }
-LL <span class="pl-en">findg</span>(LL x){
+<span class="pl-c1">LL</span> <span class="pl-en">findg</span>(<span class="pl-c1">LL</span> x){
     <span class="pl-k">if</span>(fag[x]==x) <span class="pl-k">return</span> x;
     <span class="pl-k">return</span> fag[x]=<span class="pl-c1">findg</span>(fag[x]);
 }

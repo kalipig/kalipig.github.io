@@ -102,12 +102,12 @@ $$<br>
 <p>短且易读的代码。</p>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-<span class="pl-k">const</span> LL N=<span class="pl-c1">3e5</span>+<span class="pl-c1">5</span>;
-LL n,m,f[N][<span class="pl-c1">30</span>],in[N],ans,cnt,x,y;
-vector&lt;LL&gt; g[N];
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> N=<span class="pl-c1">3e5</span>+<span class="pl-c1">5</span>;
+<span class="pl-c1">LL</span> n,m,f[N][<span class="pl-c1">30</span>],in[N],ans,cnt,x,y;
+vector&lt;<span class="pl-c1">LL</span>&gt; g[N];
 string s;
-queue&lt;LL&gt; q;
+queue&lt;<span class="pl-c1">LL</span>&gt; q;
 <span class="pl-k">int</span> <span class="pl-en">main</span>(){
     cin&gt;&gt;n&gt;&gt;m;
     cin&gt;&gt;s;
@@ -124,7 +124,7 @@ queue&lt;LL&gt; q;
         }
     }
     <span class="pl-k">while</span>(!q.<span class="pl-c1">empty</span>()){
-        LL to=q.<span class="pl-c1">front</span>();q.<span class="pl-c1">pop</span>();
+        <span class="pl-c1">LL</span> to=q.<span class="pl-c1">front</span>();q.<span class="pl-c1">pop</span>();
         <span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[to]){
             <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">0</span>;j&lt;<span class="pl-c1">26</span>;j++) f[i][j] = <span class="pl-c1">max</span>(f[i][j],f[to][j] + <span class="pl-c1">LL</span>(<span class="pl-c1">bool</span>(s[i]-<span class="pl-s"><span class="pl-pds">'</span>a<span class="pl-pds">'</span></span>==j))),ans=<span class="pl-c1">max</span>(ans,f[i][j]);
             <span class="pl-k">if</span>(!(--in[i])){

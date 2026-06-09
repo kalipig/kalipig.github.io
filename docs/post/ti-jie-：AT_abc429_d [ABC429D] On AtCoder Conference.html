@@ -92,15 +92,15 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL = <span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span> = <span class="pl-k">long</span> <span class="pl-k">long</span>;
 
-<span class="pl-k">struct</span> <span class="pl-en">P</span> { LL id, num; } p[<span class="pl-c1">500005</span>];
-LL n, m, c, a[<span class="pl-c1">500005</span>], cnt, r, now, ans;
-map&lt;LL, LL&gt; pl;
+<span class="pl-k">struct</span> <span class="pl-en">P</span> { <span class="pl-c1">LL</span> id, num; } p[<span class="pl-c1">500005</span>];
+<span class="pl-c1">LL</span> n, m, c, a[<span class="pl-c1">500005</span>], cnt, r, now, ans;
+map&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt; pl;
 
 <span class="pl-k">bool</span> <span class="pl-en">cmp</span>(P x, P y) { <span class="pl-k">return</span> x.<span class="pl-smi">id</span> &lt; y.<span class="pl-smi">id</span>; }
 
-LL <span class="pl-en">dis</span>(LL l) {
+<span class="pl-c1">LL</span> <span class="pl-en">dis</span>(<span class="pl-c1">LL</span> l) {
     <span class="pl-k">if</span> (l == cnt) <span class="pl-k">return</span> p[<span class="pl-c1">1</span>].<span class="pl-smi">id</span> + m - p[l].<span class="pl-smi">id</span>;
     <span class="pl-k">return</span> p[l + <span class="pl-c1">1</span>].<span class="pl-smi">id</span> - p[l].<span class="pl-smi">id</span>;
 }
@@ -109,7 +109,7 @@ LL <span class="pl-en">dis</span>(LL l) {
     <span class="pl-c1">ios::sync_with_stdio</span>(<span class="pl-c1">false</span>);
     cin.<span class="pl-c1">tie</span>(<span class="pl-c1">nullptr</span>);
     cin &gt;&gt; n &gt;&gt; m &gt;&gt; c;
-    <span class="pl-k">for</span> (LL i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
         cin &gt;&gt; a[i];
         <span class="pl-k">if</span> (pl.<span class="pl-c1">count</span>(a[i])) p[pl[a[i]]].<span class="pl-smi">num</span>++;
         <span class="pl-k">else</span> {
@@ -121,7 +121,7 @@ LL <span class="pl-en">dis</span>(LL l) {
     }
     <span class="pl-c1">sort</span>(p + <span class="pl-c1">1</span>, p + cnt + <span class="pl-c1">1</span>, cmp);
     r = <span class="pl-c1">1</span>; now = p[<span class="pl-c1">1</span>].<span class="pl-smi">num</span>;
-    <span class="pl-k">for</span> (LL l = <span class="pl-c1">1</span>; l &lt;= cnt; l++) {
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> l = <span class="pl-c1">1</span>; l &lt;= cnt; l++) {
         now -= p[l].<span class="pl-smi">num</span>;
         <span class="pl-k">while</span> (now &lt; c) {
             r++;

@@ -97,16 +97,16 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL= <span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,k,cnt[<span class="pl-c1">30</span>],p[<span class="pl-c1">30</span>]={<span class="pl-c1">1</span>};
-vector&lt;pair&lt;LL, LL&gt;&gt; a;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>= <span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,k,cnt[<span class="pl-c1">30</span>],p[<span class="pl-c1">30</span>]={<span class="pl-c1">1</span>};
+vector&lt;pair&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt;&gt; a;
 <span class="pl-k">void</span> <span class="pl-en">solve</span>() {
     a.<span class="pl-c1">clear</span>();
 	cin &gt;&gt; n &gt;&gt; k;
 	<span class="pl-k">for</span> (<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;=<span class="pl-c1">20</span>;i++) {
 		a.<span class="pl-c1">emplace_back</span>( p[i],p[i+<span class="pl-c1">1</span>]+i*(i?p[i-<span class="pl-c1">1</span>]:<span class="pl-c1">1</span>));
 	}
-	LL m = a.<span class="pl-c1">size</span>();
+	<span class="pl-c1">LL</span> m = a.<span class="pl-c1">size</span>();
 	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = m - <span class="pl-c1">1</span>; i &gt;= <span class="pl-c1">0</span>;i--) {
 		cnt[i] = n / a[i].<span class="pl-smi">first</span>;
 		n %= a[i].<span class="pl-smi">first</span>;
@@ -117,12 +117,12 @@ vector&lt;pair&lt;LL, LL&gt;&gt; a;
 		<span class="pl-k">return</span>;
 	}
 	<span class="pl-k">for</span>(<span class="pl-k">int</span> i = m - <span class="pl-c1">1</span>; i &gt; <span class="pl-c1">0</span>;i--) {
-		LL t =  <span class="pl-c1">min</span>(k / <span class="pl-c1">2</span>, cnt[i]);
+		<span class="pl-c1">LL</span> t =  <span class="pl-c1">min</span>(k / <span class="pl-c1">2</span>, cnt[i]);
 		cnt[i] -= t;
 		cnt[i - <span class="pl-c1">1</span>] += t * <span class="pl-c1">3</span>;
 		k -= t * <span class="pl-c1">2</span>;
 	}
-	LL ans = <span class="pl-c1">0</span>;
+	<span class="pl-c1">LL</span> ans = <span class="pl-c1">0</span>;
 	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; m; i++) {
 		ans += a[i].<span class="pl-smi">second</span> * cnt[i];
 	}

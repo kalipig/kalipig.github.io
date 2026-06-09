@@ -100,17 +100,17 @@ $A_K=T$。</li>
 <h3>Solution</h3>
 <p>考虑图上动态规划，可以很快发现有 $dp_{k,v,cnt}$ 表示走了 $k$ 步到了 $v$ 已经出现了 $x$ 次。<br>
 但是这样的 $n^3$ 复杂度无法通过。我们发现最后一维是没有实际意义的，只需要看是否为偶数。所以有：</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">    LL nk=k+<span class="pl-c1">1</span>,nv=to,ni=i;
+<div class="highlight highlight-source-c++"><pre class="notranslate">    <span class="pl-c1">LL</span> nk=k+<span class="pl-c1">1</span>,nv=to,ni=i;
     <span class="pl-k">if</span>(to==x) ni^=<span class="pl-c1">1</span>;
     dp[nk][nv][ni]+=dp[k][j][i];</pre></div>
 <p>答案为 $dp_{K,T,0}$。</p>
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-<span class="pl-k">const</span> LL mod = <span class="pl-c1">998244353</span>;
-LL dp[<span class="pl-c1">2005</span>][<span class="pl-c1">2005</span>][<span class="pl-c1">2</span>],n,m,K,s,t,x;
-vector&lt;LL&gt; g[<span class="pl-c1">2005</span>];
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> mod = <span class="pl-c1">998244353</span>;
+<span class="pl-c1">LL</span> dp[<span class="pl-c1">2005</span>][<span class="pl-c1">2005</span>][<span class="pl-c1">2</span>],n,m,K,s,t,x;
+vector&lt;<span class="pl-c1">LL</span>&gt; g[<span class="pl-c1">2005</span>];
 <span class="pl-k">int</span> <span class="pl-en">main</span>(){
     cin&gt;&gt;n&gt;&gt;m&gt;&gt;K&gt;&gt;s&gt;&gt;t&gt;&gt;x;
 	dp[<span class="pl-c1">0</span>][s][<span class="pl-c1">0</span>]=<span class="pl-c1">1</span>;
@@ -123,7 +123,7 @@ vector&lt;LL&gt; g[<span class="pl-c1">2005</span>];
 		<span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">1</span>;j&lt;=n;j++)
 			<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;=<span class="pl-c1">1</span>;i++) {
         	<span class="pl-k">for</span> (<span class="pl-k">auto</span> to : g[j]) {
-            	LL nk=k+<span class="pl-c1">1</span>,nv=to,ni=i;
+            	<span class="pl-c1">LL</span> nk=k+<span class="pl-c1">1</span>,nv=to,ni=i;
             	<span class="pl-k">if</span>(to==x) ni^=<span class="pl-c1">1</span>;
             	dp[nk][nv][ni]+=dp[k][j][i];<span class="pl-c"><span class="pl-c">//</span>多一个，下一个位置，出现。</span>
 				dp[nk][nv][ni]%=mod;

@@ -103,15 +103,15 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
 
-LL p[<span class="pl-c1">18</span>]={<span class="pl-c1">1</span>};
+<span class="pl-c1">LL</span> p[<span class="pl-c1">18</span>]={<span class="pl-c1">1</span>};
 
-LL <span class="pl-en">sq</span>(LL n){
+<span class="pl-c1">LL</span> <span class="pl-en">sq</span>(<span class="pl-c1">LL</span> n){
     <span class="pl-k">if</span>(n==<span class="pl-c1">0</span>)<span class="pl-k">return</span> <span class="pl-c1">0</span>;
-    LL l=<span class="pl-c1">1</span>,r=n;
+    <span class="pl-c1">LL</span> l=<span class="pl-c1">1</span>,r=n;
     <span class="pl-k">while</span>(l&lt;r){
-        LL m=(l+r+<span class="pl-c1">1</span>)/<span class="pl-c1">2</span>;
+        <span class="pl-c1">LL</span> m=(l+r+<span class="pl-c1">1</span>)/<span class="pl-c1">2</span>;
         <span class="pl-k">if</span>(m&lt;=n/m)l=m;
         <span class="pl-k">else</span> r=m-<span class="pl-c1">1</span>;
     }
@@ -119,20 +119,20 @@ LL <span class="pl-en">sq</span>(LL n){
 }
 
 <span class="pl-k">void</span> <span class="pl-en">solve</span>(){
-    LL c,d;
+    <span class="pl-c1">LL</span> c,d;
     cin&gt;&gt;c&gt;&gt;d;
-    LL ans=<span class="pl-c1">0</span>;
-    LL mn=c+<span class="pl-c1">1</span>,mx=c+d;
+    <span class="pl-c1">LL</span> ans=<span class="pl-c1">0</span>;
+    <span class="pl-c1">LL</span> mn=c+<span class="pl-c1">1</span>,mx=c+d;
     <span class="pl-k">int</span> l1=<span class="pl-c1">to_string</span>(mn).<span class="pl-c1">size</span>(),l2=<span class="pl-c1">to_string</span>(mx).<span class="pl-c1">size</span>();
     <span class="pl-k">for</span>(<span class="pl-k">int</span> i=l1;i&lt;=l2;i++){
-        LL a=<span class="pl-c1">max</span>(<span class="pl-c1">1LL</span>,p[i-<span class="pl-c1">1</span>]-c);
-        LL b=<span class="pl-c1">min</span>(d,p[i]-<span class="pl-c1">1</span>-c);
+        <span class="pl-c1">LL</span> a=<span class="pl-c1">max</span>(<span class="pl-c1">1LL</span>,p[i-<span class="pl-c1">1</span>]-c);
+        <span class="pl-c1">LL</span> b=<span class="pl-c1">min</span>(d,p[i]-<span class="pl-c1">1</span>-c);
         <span class="pl-k">if</span>(a&gt;b)<span class="pl-k">continue</span>;
-        LL A=c*p[i]+(c+a);
-        LL B=c*p[i]+(c+b);
-        LL x=<span class="pl-c1">sq</span>(A);
+        <span class="pl-c1">LL</span> A=c*p[i]+(c+a);
+        <span class="pl-c1">LL</span> B=c*p[i]+(c+b);
+        <span class="pl-c1">LL</span> x=<span class="pl-c1">sq</span>(A);
         <span class="pl-k">if</span>(x*x&lt;A)x++;
-        LL y=<span class="pl-c1">sq</span>(B);
+        <span class="pl-c1">LL</span> y=<span class="pl-c1">sq</span>(B);
         <span class="pl-k">if</span>(x&lt;=y)ans+=y-x+<span class="pl-c1">1</span>;
     }
     cout&lt;&lt;ans&lt;&lt;<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;

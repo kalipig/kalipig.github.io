@@ -106,7 +106,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <span class="pl-k">while</span> (!q.<span class="pl-c1">empty</span>()) q.<span class="pl-c1">pop</span>();<span class="pl-c"><span class="pl-c">//</span>队列存被吃了的。</span>
 
     <span class="pl-k">while</span> (l &lt;= r) {
-        pair&lt;LL, LL&gt; x = {<span class="pl-c1">0</span>, <span class="pl-c1">0</span>};
+        pair&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt; x = {<span class="pl-c1">0</span>, <span class="pl-c1">0</span>};
         <span class="pl-k">if</span> (r &gt; l) x = a[r];
         <span class="pl-k">if</span> (!q.<span class="pl-c1">empty</span>()) x = <span class="pl-c1">max</span>(x, q.<span class="pl-c1">front</span>());<span class="pl-c"><span class="pl-c">//</span>在队列和数组中找到最大的一个</span>
         <span class="pl-k">if</span>(r-l&lt;<span class="pl-c1">1</span>) <span class="pl-k">break</span>;
@@ -131,14 +131,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>和上面的步骤一样吃的。</li>
 <li>看一下操作次数的奇偶。</li>
 </ul>
-<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">bool</span> <span class="pl-en">check</span>(pair&lt;LL, LL&gt; x) {
-    LL cnt = <span class="pl-c1">1</span>;
-    pair&lt;LL, LL&gt; last;
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">bool</span> <span class="pl-en">check</span>(pair&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt; x) {
+    <span class="pl-c1">LL</span> cnt = <span class="pl-c1">1</span>;
+    pair&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt; last;
     <span class="pl-k">if</span> (l &lt; r) last = a[l + <span class="pl-c1">1</span>];
     <span class="pl-k">if</span> (!q.<span class="pl-c1">empty</span>()) last = <span class="pl-c1">min</span>(last, q.<span class="pl-c1">back</span>());<span class="pl-c"><span class="pl-c">//</span>找到小的那个</span>
 
     <span class="pl-k">while</span> (<span class="pl-c1">true</span>) {
-        pair&lt;LL, LL&gt; to = {<span class="pl-c1">0</span>, <span class="pl-c1">0</span>};
+        pair&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt; to = {<span class="pl-c1">0</span>, <span class="pl-c1">0</span>};
         <span class="pl-k">if</span> (l &lt; r) to = a[r];
         <span class="pl-k">if</span> (!q.<span class="pl-c1">empty</span>()) to = <span class="pl-c1">max</span>(to, q.<span class="pl-c1">front</span>());
 

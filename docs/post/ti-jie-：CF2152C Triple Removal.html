@@ -98,8 +98,8 @@ $0$ 和 $1$ 交替出现，不管你要删哪个代价都是 $2$。删了就会�
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,a[<span class="pl-c1">500005</span>]={-<span class="pl-c1">1</span>},cnt0[<span class="pl-c1">500005</span>],cnt1[<span class="pl-c1">500005</span>],q,b[<span class="pl-c1">500005</span>];
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,a[<span class="pl-c1">500005</span>]={-<span class="pl-c1">1</span>},cnt0[<span class="pl-c1">500005</span>],cnt1[<span class="pl-c1">500005</span>],q,b[<span class="pl-c1">500005</span>];
 <span class="pl-k">void</span> <span class="pl-en">solve</span>(){
     <span class="pl-c1">memset</span>(b,<span class="pl-c1">0</span>,<span class="pl-k">sizeof</span>(b));
     cin &gt;&gt; n&gt;&gt;q;
@@ -113,7 +113,7 @@ LL n,a[<span class="pl-c1">500005</span>]={-<span class="pl-c1">1</span>},cnt0[<
         b[i]+=b[i-<span class="pl-c1">1</span>];
     }
     <span class="pl-k">while</span>(q--){
-        LL l,r,res=<span class="pl-c1">0</span>;
+        <span class="pl-c1">LL</span> l,r,res=<span class="pl-c1">0</span>;
         cin&gt;&gt;l&gt;&gt;r;
         
         <span class="pl-k">if</span>((r-l+<span class="pl-c1">1</span>&lt;<span class="pl-c1">3</span>)||((cnt0[r]-cnt0[l-<span class="pl-c1">1</span>])%<span class="pl-c1">3</span>)||((cnt1[r]-cnt1[l-<span class="pl-c1">1</span>]))%<span class="pl-c1">3</span>){

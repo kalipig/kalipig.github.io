@@ -105,8 +105,8 @@ $$2\times cnt+cntt-(j-i)$$</p>
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,a[<span class="pl-c1">500005</span>],ans,l,r,t;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,a[<span class="pl-c1">500005</span>],ans,l,r,t;
 <span class="pl-k">int</span> <span class="pl-en">main</span>(){
     cin&gt;&gt;t;
     <span class="pl-k">while</span>(t--){
@@ -116,7 +116,7 @@ LL n,a[<span class="pl-c1">500005</span>],ans,l,r,t;
             cin&gt;&gt;a[i];
         }
         <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++){
-            LL cnt=<span class="pl-c1">0</span>,cntt=<span class="pl-c1">0</span>;
+            <span class="pl-c1">LL</span> cnt=<span class="pl-c1">0</span>,cntt=<span class="pl-c1">0</span>;
             <span class="pl-k">for</span>(<span class="pl-k">int</span> j=i+<span class="pl-c1">1</span>;j&lt;=n;j++){
                 <span class="pl-k">if</span>(a[j]==a[i]) cntt++;
                 <span class="pl-k">if</span>(a[j]&lt;a[i]){

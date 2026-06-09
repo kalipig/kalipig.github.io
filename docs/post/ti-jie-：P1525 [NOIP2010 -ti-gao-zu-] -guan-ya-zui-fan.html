@@ -98,7 +98,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a860a4c92588f1b4b38983037c0d475eded195592d92f99451a314fbaec099e8/68747470733a2f2f6f6977696b692e636f6d2f67726170682f696d616765732f62692d67726170682e737667"><img src="https://camo.githubusercontent.com/a860a4c92588f1b4b38983037c0d475eded195592d92f99451a314fbaec099e8/68747470733a2f2f6f6977696b692e636f6d2f67726170682f696d616765732f62692d67726170682e737667" alt="" data-canonical-src="https://oiwiki.com/graph/images/bi-graph.svg" style="max-width: 100%;"></a></p>
 <p>现在我们知道，要判断一个答案是否合法，<strong>只要把大于答案的边连起来，判断是否为一个二分图</strong>。<br>
 介绍一个 dfs 判断二分图的方法：</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">bool</span> <span class="pl-en">dfs</span>(LL v, LL c){
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">bool</span> <span class="pl-en">dfs</span>(<span class="pl-c1">LL</span> v, <span class="pl-c1">LL</span> c){
     color[v] = c;    <span class="pl-c"><span class="pl-c">//</span>将当前顶点涂色</span>
     <span class="pl-k">for</span>(<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; n; i++){    <span class="pl-c"><span class="pl-c">//</span>遍历所有相邻顶点，即连着的点</span>
         <span class="pl-k">if</span>(edge[v][i] == <span class="pl-c1">1</span>){    <span class="pl-c"><span class="pl-c">//</span>如果顶点存在</span>
@@ -118,7 +118,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         cin&gt;&gt;e[i].<span class="pl-smi">x</span>&gt;&gt;e[i].<span class="pl-smi">y</span>&gt;&gt;e[i].<span class="pl-smi">w</span>;<span class="pl-c"><span class="pl-c">//</span>按边存，方便排序</span>
     }
     <span class="pl-c1">sort</span>(<span class="pl-c1">e+1</span>,e+m+<span class="pl-c1">1</span>);
-    LL l=<span class="pl-c1">0</span>,r=m,mid;
+    <span class="pl-c1">LL</span> l=<span class="pl-c1">0</span>,r=m,mid;
     <span class="pl-k">while</span>(l&lt;r-<span class="pl-c1">1</span>){
         mid=(l+r)/<span class="pl-c1">2</span>;
         <span class="pl-k">if</span>(<span class="pl-c1">check</span>(mid))r=mid;

@@ -108,7 +108,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>与黑点相邻时，必须与白点相邻，所以 $f_{i,0/4}$ 不用考虑。然后就是 $f_{i,0}$ 这个地方<del>我原来用了一种复杂的方法实现，后来在题解中</del>找到了一个简单的做法，如下：</p>
 <div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[x]){<span class="pl-c"><span class="pl-c">//</span>遍历儿子</span>
 	<span class="pl-k">if</span>(i!=fa){
-		LL mn=<span class="pl-c1">min</span>(f[i][<span class="pl-c1">0</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">1</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">3</span>],f[i][<span class="pl-c1">4</span>])));<span class="pl-c"><span class="pl-c">//</span>找到所有情况里最小的</span>
+		<span class="pl-c1">LL</span> mn=<span class="pl-c1">min</span>(f[i][<span class="pl-c1">0</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">1</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">3</span>],f[i][<span class="pl-c1">4</span>])));<span class="pl-c"><span class="pl-c">//</span>找到所有情况里最小的</span>
 		f[x][<span class="pl-c1">1</span>]+=mn;<span class="pl-c"><span class="pl-c">//</span>加上去</span>
 		<span class="pl-k">if</span>(!vis[i]){<span class="pl-c"><span class="pl-c">//</span>如果是黑点</span>
 			tmp=<span class="pl-c1">min</span>(tmp,f[i][<span class="pl-c1">3</span>]-mn);<span class="pl-c"><span class="pl-c">//</span>最小的一个差</span>
@@ -125,12 +125,12 @@ f[x][<span class="pl-c1">1</span>]+=tmp;<span class="pl-c"><span class="pl-c">//
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-<span class="pl-k">const</span> LL inf=<span class="pl-c1">1e12</span>;
-LL n,k,f[<span class="pl-c1">1000005</span>][<span class="pl-c1">5</span>];
-vector&lt;LL&gt; g[<span class="pl-c1">1000005</span>];
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> inf=<span class="pl-c1">1e12</span>;
+<span class="pl-c1">LL</span> n,k,f[<span class="pl-c1">1000005</span>][<span class="pl-c1">5</span>];
+vector&lt;<span class="pl-c1">LL</span>&gt; g[<span class="pl-c1">1000005</span>];
 <span class="pl-k">bool</span> vis[<span class="pl-c1">1000005</span>],flag[<span class="pl-c1">1000005</span>];
-<span class="pl-k">void</span> <span class="pl-en">dfs</span>(LL x,LL fa){
+<span class="pl-k">void</span> <span class="pl-en">dfs</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> fa){
     f[x][<span class="pl-c1">3</span>]=<span class="pl-c1">1</span>;
     <span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[x]){
       	<span class="pl-k">if</span>(i!=fa) <span class="pl-c1">dfs</span>(i,x);
@@ -142,12 +142,12 @@ vector&lt;LL&gt; g[<span class="pl-c1">1000005</span>];
       }
     }<span class="pl-k">else</span> <span class="pl-k">if</span>(flag[x]){
 		f[x][<span class="pl-c1">0</span>]=f[x][<span class="pl-c1">4</span>]=inf;
-		LL tmp=inf;
+		<span class="pl-c1">LL</span> tmp=inf;
 		<span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[x]){
 			<span class="pl-k">if</span>(i!=fa){
 				f[x][<span class="pl-c1">2</span>]+=<span class="pl-c1">min</span>(f[i][<span class="pl-c1">0</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">1</span>],f[i][<span class="pl-c1">4</span>]));
 				f[x][<span class="pl-c1">3</span>]+=<span class="pl-c1">min</span>({f[i][<span class="pl-c1">0</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">1</span>],f[i][<span class="pl-c1">4</span>]),<span class="pl-c1">min</span>(f[i][<span class="pl-c1">2</span>],f[i][<span class="pl-c1">3</span>])});
-				LL mn=<span class="pl-c1">min</span>(f[i][<span class="pl-c1">0</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">1</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">3</span>],f[i][<span class="pl-c1">4</span>])));
+				<span class="pl-c1">LL</span> mn=<span class="pl-c1">min</span>(f[i][<span class="pl-c1">0</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">1</span>],<span class="pl-c1">min</span>(f[i][<span class="pl-c1">3</span>],f[i][<span class="pl-c1">4</span>])));
 				f[x][<span class="pl-c1">1</span>]+=mn;
 				<span class="pl-k">if</span>(!vis[i]){
 					tmp=<span class="pl-c1">min</span>(tmp,f[i][<span class="pl-c1">3</span>]-mn);

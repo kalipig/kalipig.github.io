@@ -103,16 +103,16 @@ $$<br>
 <p>还是一样的，容易想到答案为 $f[n][m]$，但是实际上我们要考虑两种车之间的限制，即不能同时填一行或一列。</p>
 <p>所以如果黑车填了 $i$ 行 $j$ 列，那么白车则会填剩下 $n-i$ 行 $m-j$ 列中的 $p$ 行 $q$ 列。</p>
 <p>所以把两个车的方案乘起来就好了：</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">	LL tmp1=c[n][i]*c[n-i][p]%mod;
-	LL tmp2=c[m][j]*c[m-j][q]%mod;
+<div class="highlight highlight-source-c++"><pre class="notranslate">	<span class="pl-c1">LL</span> tmp1=c[n][i]*c[n-i][p]%mod;
+	<span class="pl-c1">LL</span> tmp2=c[m][j]*c[m-j][q]%mod;
 	ans=(ans+tmp1*tmp2%mod*f1[i][j]%mod*f2[p][q]+mod)%mod;</pre></div>
 <h3>Code</h3>
 <p><strong>注意取模！！！</strong></p>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-<span class="pl-k">const</span> LL mod=<span class="pl-c1">998244353</span>;
-LL c[<span class="pl-c1">5005</span>][<span class="pl-c1">5005</span>]={<span class="pl-c1">1</span>},f1[<span class="pl-c1">5005</span>][<span class="pl-c1">5005</span>],f2[<span class="pl-c1">5005</span>][<span class="pl-c1">5005</span>],n,m,b,w,ans;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> mod=<span class="pl-c1">998244353</span>;
+<span class="pl-c1">LL</span> c[<span class="pl-c1">5005</span>][<span class="pl-c1">5005</span>]={<span class="pl-c1">1</span>},f1[<span class="pl-c1">5005</span>][<span class="pl-c1">5005</span>],f2[<span class="pl-c1">5005</span>][<span class="pl-c1">5005</span>],n,m,b,w,ans;
 <span class="pl-k">int</span> <span class="pl-en">main</span>(){
     cin&gt;&gt;n&gt;&gt;m&gt;&gt;b&gt;&gt;w;
     <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=<span class="pl-c1">3000</span>;i++){
@@ -152,8 +152,8 @@ LL c[<span class="pl-c1">5005</span>][<span class="pl-c1">5005</span>]={<span cl
         <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">1</span>;j&lt;=m;j++){
             <span class="pl-k">for</span>(<span class="pl-k">int</span> p=<span class="pl-c1">1</span>;p+i&lt;=n;p++){
                 <span class="pl-k">for</span>(<span class="pl-k">int</span> q=<span class="pl-c1">1</span>;q+j&lt;=m;q++){
-                    LL tmp1=c[n][i]*c[n-i][p]%mod;
-                    LL tmp2=c[m][j]*c[m-j][q]%mod;
+                    <span class="pl-c1">LL</span> tmp1=c[n][i]*c[n-i][p]%mod;
+                    <span class="pl-c1">LL</span> tmp2=c[m][j]*c[m-j][q]%mod;
                     ans=(ans+tmp1*tmp2%mod*f1[i][j]%mod*f2[p][q]+mod)%mod;
                 }
             }

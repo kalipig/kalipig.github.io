@@ -100,19 +100,19 @@ $x&amp;lt;i$，这说明前 $i$ 个数只出现了 $x$ 个，那么 $a_i=a_{i-x}
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n;
 <span class="pl-k">void</span> <span class="pl-en">solve</span>(){
     cin &gt;&gt; n;
-    vector&lt;LL&gt; <span class="pl-c1">b</span>(n+<span class="pl-c1">5</span>),<span class="pl-c1">a</span>(n+<span class="pl-c1">5</span>);
+    vector&lt;<span class="pl-c1">LL</span>&gt; <span class="pl-c1">b</span>(n+<span class="pl-c1">5</span>),<span class="pl-c1">a</span>(n+<span class="pl-c1">5</span>);
     <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
         cin &gt;&gt; b[i];
     }
     a[<span class="pl-c1">1</span>] = <span class="pl-c1">1</span>;
-    LL k=<span class="pl-c1">2</span>;
+    <span class="pl-c1">LL</span> k=<span class="pl-c1">2</span>;
     <span class="pl-k">bool</span> flag = <span class="pl-c1">true</span>;
     <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">2</span>; i &lt;= n; i++) {
-        LL x= b[i] - b[i-<span class="pl-c1">1</span>];
+        <span class="pl-c1">LL</span> x= b[i] - b[i-<span class="pl-c1">1</span>];
         <span class="pl-k">if</span> (x &gt; i) {
             flag = <span class="pl-c1">false</span>;
             <span class="pl-k">break</span>;
@@ -120,7 +120,7 @@ LL n;
         <span class="pl-k">if</span> (x == i) {
             a[i] = k++;
         } <span class="pl-k">else</span> {
-            LL tmp= i - x;
+            <span class="pl-c1">LL</span> tmp= i - x;
             <span class="pl-k">if</span> (tmp &lt;= <span class="pl-c1">0</span>) {
                 flag = <span class="pl-c1">false</span>;
                 <span class="pl-k">break</span>;

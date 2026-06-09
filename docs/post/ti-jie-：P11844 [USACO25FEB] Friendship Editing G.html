@@ -109,9 +109,9 @@ $k$ 为 $t$ 的补集。</li>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 #<span class="pl-k">define</span> <span class="pl-en">cnt1</span> __builtin_popcount
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL = <span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span> = <span class="pl-k">long</span> <span class="pl-k">long</span>;
 
-LL n, m, mx, dp[<span class="pl-c1">1</span> &lt;&lt; <span class="pl-c1">19</span>], U[<span class="pl-c1">20</span>], V[<span class="pl-c1">20</span>], g[<span class="pl-c1">20</span>], num[<span class="pl-c1">1</span> &lt;&lt; <span class="pl-c1">19</span>];
+<span class="pl-c1">LL</span> n, m, mx, dp[<span class="pl-c1">1</span> &lt;&lt; <span class="pl-c1">19</span>], U[<span class="pl-c1">20</span>], V[<span class="pl-c1">20</span>], g[<span class="pl-c1">20</span>], num[<span class="pl-c1">1</span> &lt;&lt; <span class="pl-c1">19</span>];
 
 <span class="pl-k">int</span> <span class="pl-en">main</span>() {
     cin &gt;&gt; n &gt;&gt; m;
@@ -136,8 +136,8 @@ LL n, m, mx, dp[<span class="pl-c1">1</span> &lt;&lt; <span class="pl-c1">19</sp
 
     <span class="pl-k">for</span> (<span class="pl-k">int</span> s = <span class="pl-c1">0</span>; s &lt;= mx; s++) {
         <span class="pl-k">for</span> (<span class="pl-k">int</span> t = s; t; t = (t - <span class="pl-c1">1</span>) &amp; s) {
-            LL k = s ^ t;
-            LL cost = dp[t] + <span class="pl-c1">cnt1</span>(t) * <span class="pl-c1">cnt1</span>(k) - (num[s] - num[t] - num[k]) + num[k];
+            <span class="pl-c1">LL</span> k = s ^ t;
+            <span class="pl-c1">LL</span> cost = dp[t] + <span class="pl-c1">cnt1</span>(t) * <span class="pl-c1">cnt1</span>(k) - (num[s] - num[t] - num[k]) + num[k];
             dp[s] = <span class="pl-c1">min</span>(dp[s], cost);
         }
     }

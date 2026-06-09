@@ -103,12 +103,12 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h2>Code</h2>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-<span class="pl-k">const</span> LL N=<span class="pl-c1">1e6</span>+<span class="pl-c1">5</span>,mod=<span class="pl-c1">1e9</span>+<span class="pl-c1">7</span>;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> N=<span class="pl-c1">1e6</span>+<span class="pl-c1">5</span>,mod=<span class="pl-c1">1e9</span>+<span class="pl-c1">7</span>;
 <span class="pl-k">namespace</span> <span class="pl-en">tree</span>{
-    vector&lt;LL&gt; g[N];
-    LL st,ed,dst[N],ded[N];
-    <span class="pl-k">void</span> <span class="pl-en">get_st</span>(LL x,LL fa){
+    vector&lt;<span class="pl-c1">LL</span>&gt; g[N];
+    <span class="pl-c1">LL</span> st,ed,dst[N],ded[N];
+    <span class="pl-k">void</span> <span class="pl-en">get_st</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> fa){
         <span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[x]){
             <span class="pl-k">if</span>(i==fa) <span class="pl-k">continue</span>;
             dst[i]=dst[x]+<span class="pl-c1">1</span>;
@@ -116,7 +116,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
             <span class="pl-c1">get_st</span>(i,x);
         }
     }
-    <span class="pl-k">void</span> <span class="pl-en">get_ed</span>(LL x,LL fa){
+    <span class="pl-k">void</span> <span class="pl-en">get_ed</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> fa){
         <span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[x]){
             <span class="pl-k">if</span>(i==fa) <span class="pl-k">continue</span>;
             ded[i]=ded[x]+<span class="pl-c1">1</span>;
@@ -126,8 +126,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     }
 }
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">tree</span><span class="pl-k">;</span>
-LL n,dis[N],pw[N]={<span class="pl-c1">1</span>},f[N],s,ans,mn=<span class="pl-c1">0</span>;
-<span class="pl-k">bool</span> <span class="pl-en">cmp</span>(LL p,LL q){
+<span class="pl-c1">LL</span> n,dis[N],pw[N]={<span class="pl-c1">1</span>},f[N],s,ans,mn=<span class="pl-c1">0</span>;
+<span class="pl-k">bool</span> <span class="pl-en">cmp</span>(<span class="pl-c1">LL</span> p,<span class="pl-c1">LL</span> q){
     <span class="pl-k">return</span> dis[p]&gt;dis[q];
 }
 <span class="pl-k">int</span> <span class="pl-en">main</span>(){
@@ -152,7 +152,7 @@ LL n,dis[N],pw[N]={<span class="pl-c1">1</span>},f[N],s,ans,mn=<span class="pl-c
     <span class="pl-c1">sort</span>(f+<span class="pl-c1">1</span>,f+n+<span class="pl-c1">1</span>,cmp);
     ans=s*pw[n]%mod,s--;
     <span class="pl-c"><span class="pl-c">//</span>cout&lt;&lt;mn;</span>
-    LL j=<span class="pl-c1">1</span>;
+    <span class="pl-c1">LL</span> j=<span class="pl-c1">1</span>;
     <span class="pl-k">while</span>((s--)&gt;=mn){
         <span class="pl-k">while</span>(j&lt;=n&amp;&amp;s&lt;dis[f[j]]) j++;
 		ans=(ans-pw[n-j+<span class="pl-c1">2</span>])%mod;

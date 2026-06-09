@@ -98,18 +98,18 @@ $$1\leq dis[v]-dis[u] \leq 2$$<br>
 <p>关于 spfa 的差分约束具体操作，就是我们在建图的时候正着建一条边权为 2 的，反着建一条边权为 -1 的，最后就是判断一下负环（详见代码）。</p>
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
-#<span class="pl-k">define</span> <span class="pl-en">pi</span> pair&lt;LL,LL&gt;
+#<span class="pl-k">define</span> <span class="pl-en">pi</span> pair&lt;<span class="pl-c1">LL</span>,<span class="pl-c1">LL</span>&gt;
 #<span class="pl-k">define</span> <span class="pl-en">val</span> first
 #<span class="pl-k">define</span> <span class="pl-en">id</span> second
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,m,U[<span class="pl-c1">5005</span>],V[<span class="pl-c1">5005</span>],dis[<span class="pl-c1">5005</span>],tmp[<span class="pl-c1">5005</span>],cnt[<span class="pl-c1">5005</span>];
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,m,U[<span class="pl-c1">5005</span>],V[<span class="pl-c1">5005</span>],dis[<span class="pl-c1">5005</span>],tmp[<span class="pl-c1">5005</span>],cnt[<span class="pl-c1">5005</span>];
 <span class="pl-k">bool</span> vis[<span class="pl-c1">5005</span>];
 vector&lt;pi&gt; g[<span class="pl-c1">5005</span>];
-<span class="pl-k">inline</span> <span class="pl-k">void</span> <span class="pl-en">add</span>(LL u,LL v,LL w){
+<span class="pl-k">inline</span> <span class="pl-k">void</span> <span class="pl-en">add</span>(<span class="pl-c1">LL</span> u,<span class="pl-c1">LL</span> v,<span class="pl-c1">LL</span> w){
     g[u].<span class="pl-c1">push_back</span>({w,v});
 }
-<span class="pl-k">void</span> <span class="pl-en">dfs1</span>(LL x){
+<span class="pl-k">void</span> <span class="pl-en">dfs1</span>(<span class="pl-c1">LL</span> x){
     tmp[x]++;
     <span class="pl-k">if</span>(x==n) <span class="pl-k">return</span> ;
     <span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[x]){
@@ -118,7 +118,7 @@ vector&lt;pi&gt; g[<span class="pl-c1">5005</span>];
         }
     }
 }
-<span class="pl-k">void</span> <span class="pl-en">dfs2</span>(LL x){
+<span class="pl-k">void</span> <span class="pl-en">dfs2</span>(<span class="pl-c1">LL</span> x){
     tmp[x]++;
     <span class="pl-k">if</span>(x==<span class="pl-c1">1</span>) <span class="pl-k">return</span> ;
     <span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[x]){
@@ -127,13 +127,13 @@ vector&lt;pi&gt; g[<span class="pl-c1">5005</span>];
         }
     }
 }
-queue&lt;LL&gt; q;
-<span class="pl-k">bool</span> <span class="pl-en">spfa</span>(LL s){
+queue&lt;<span class="pl-c1">LL</span>&gt; q;
+<span class="pl-k">bool</span> <span class="pl-en">spfa</span>(<span class="pl-c1">LL</span> s){
     <span class="pl-c1">memset</span>(dis,<span class="pl-c1">0x3f</span>,<span class="pl-k">sizeof</span>(dis));
     dis[s]=<span class="pl-c1">0</span>,vis[s]=<span class="pl-c1">1</span>;
     q.<span class="pl-c1">push</span>(s);
     <span class="pl-k">while</span>(!q.<span class="pl-c1">empty</span>()){
-        LL to=q.<span class="pl-c1">front</span>();q.<span class="pl-c1">pop</span>();
+        <span class="pl-c1">LL</span> to=q.<span class="pl-c1">front</span>();q.<span class="pl-c1">pop</span>();
         <span class="pl-k">if</span>(++cnt[to]&gt;m) <span class="pl-k">return</span> <span class="pl-c1">0</span>;
         vis[to]=<span class="pl-c1">0</span>;
         <span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[to]){

@@ -103,10 +103,10 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL = <span class="pl-k">long</span> <span class="pl-k">long</span>;
-<span class="pl-k">const</span> LL N = <span class="pl-c1">2e5</span> + <span class="pl-c1">5</span>;
-LL X[N], Y[N], n, ans;
-multiset&lt;LL&gt; cnt1, cnt2;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span> = <span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> N = <span class="pl-c1">2e5</span> + <span class="pl-c1">5</span>;
+<span class="pl-c1">LL</span> X[N], Y[N], n, ans;
+multiset&lt;<span class="pl-c1">LL</span>&gt; cnt1, cnt2;
 
 <span class="pl-k">void</span> <span class="pl-en">solve</span>(){
     cnt1.<span class="pl-c1">clear</span>(), cnt2.<span class="pl-c1">clear</span>();
@@ -118,7 +118,7 @@ multiset&lt;LL&gt; cnt1, cnt2;
         cnt2.<span class="pl-c1">insert</span>(Y[i]);
     }
     
-    LL w = *cnt1.<span class="pl-c1">rbegin</span>() - *cnt1.<span class="pl-c1">begin</span>() + <span class="pl-c1">1</span>, h = *cnt2.<span class="pl-c1">rbegin</span>() - *cnt2.<span class="pl-c1">begin</span>() + <span class="pl-c1">1</span>;
+    <span class="pl-c1">LL</span> w = *cnt1.<span class="pl-c1">rbegin</span>() - *cnt1.<span class="pl-c1">begin</span>() + <span class="pl-c1">1</span>, h = *cnt2.<span class="pl-c1">rbegin</span>() - *cnt2.<span class="pl-c1">begin</span>() + <span class="pl-c1">1</span>;
     ans = <span class="pl-c1">min</span>(ans, w * h);
 
     <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
@@ -143,7 +143,7 @@ multiset&lt;LL&gt; cnt1, cnt2;
 }
 
 <span class="pl-k">int</span> <span class="pl-en">main</span>(){
-    LL t;
+    <span class="pl-c1">LL</span> t;
     cin &gt;&gt; t;
     <span class="pl-k">while</span> (t--) {
         <span class="pl-c1">solve</span>();

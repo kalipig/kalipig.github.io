@@ -89,7 +89,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>首先要求出 $1\rarr n$ 的所有路径必定经过的边，枚举每个路径肯定不行，但是从 $1$ 到 $n$ 一定是从 $1$ 的强连通分量到 $n$ 的强连通分量的边，那么关键边一定就是连接强连通分量的边。<br>
 所以我们先缩点，然后再我们建新图时，记得记录新边原来的编号，这样方便找。</p>
 <div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>; i &lt;= m; i++) {
-        LL x = e[i].<span class="pl-smi">first</span>, y = e[i].<span class="pl-smi">second</span>;
+        <span class="pl-c1">LL</span> x = e[i].<span class="pl-smi">first</span>, y = e[i].<span class="pl-smi">second</span>;
         <span class="pl-k">if</span> (bel[x] != bel[y]) {
             v[bel[x]].<span class="pl-c1">emplace_back</span>(bel[y], i);<span class="pl-c"><span class="pl-c">//</span>记录原来的编号 i</span>
             v[bel[y]].<span class="pl-c1">emplace_back</span>(bel[x], i);
@@ -101,14 +101,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 在松弛时，如果 $dis_x=dis_{to}+1$，这里加一是因为我们计算的是一条边两边的端点，而边权为 $1$，我们就比较 $ans_{id_x}$ 和 $ans_{id_{to}}$。这里 $ans$ 是我们记录的答案，$to$ 是当前点，$x$ 是枚举的点。</p>
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
-<span class="pl-k">using</span> LL = <span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span> = <span class="pl-k">long</span> <span class="pl-k">long</span>;
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">const</span> LL N = <span class="pl-c1">2e5</span> + <span class="pl-c1">5</span>;
-LL n, m, dfn[N], vis[N], low[N], cnt, num, st[N], top, bel[N], res[N], dis[N];
-vector&lt;pair&lt;LL, LL&gt;&gt; g[N], v[N];
-pair&lt;LL, LL&gt; e[N];
-set&lt;LL&gt; path;
-<span class="pl-k">void</span> <span class="pl-en">tarjan</span>(LL x, LL fa) {
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> N = <span class="pl-c1">2e5</span> + <span class="pl-c1">5</span>;
+<span class="pl-c1">LL</span> n, m, dfn[N], vis[N], low[N], cnt, num, st[N], top, bel[N], res[N], dis[N];
+vector&lt;pair&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt;&gt; g[N], v[N];
+pair&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt; e[N];
+set&lt;<span class="pl-c1">LL</span>&gt; path;
+<span class="pl-k">void</span> <span class="pl-en">tarjan</span>(<span class="pl-c1">LL</span> x, <span class="pl-c1">LL</span> fa) {
     dfn[x] = low[x] = ++cnt;
     st[++top] = x;
     vis[x] = <span class="pl-c1">1</span>;
@@ -123,7 +123,7 @@ set&lt;LL&gt; path;
     }
     <span class="pl-k">if</span> (low[x] == dfn[x]) {
         num++;
-        LL to;
+        <span class="pl-c1">LL</span> to;
         <span class="pl-k">do</span> {
             to = st[top--];
             bel[to] = num;
@@ -131,7 +131,7 @@ set&lt;LL&gt; path;
         } <span class="pl-k">while</span> (to != x);
     }
 }
-priority_queue&lt;tuple&lt;LL, LL, LL&gt;, vector&lt;tuple&lt;LL, LL, LL&gt;&gt;, greater&lt;tuple&lt;LL, LL, LL&gt;&gt;&gt; q;
+priority_queue&lt;tuple&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt;, vector&lt;tuple&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt;&gt;, greater&lt;tuple&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt;&gt;&gt; q;
  
 <span class="pl-k">void</span> <span class="pl-en">dijkstra</span>() {
     <span class="pl-c1">memset</span>(dis, <span class="pl-c1">0x3f</span>, <span class="pl-k">sizeof</span>(dis));
@@ -161,7 +161,7 @@ priority_queue&lt;tuple&lt;LL, LL, LL&gt;, vector&lt;tuple&lt;LL, LL, LL&gt;&gt;
     }
 }
  
-<span class="pl-k">bool</span> <span class="pl-en">dfs</span>(LL x, LL fa) {
+<span class="pl-k">bool</span> <span class="pl-en">dfs</span>(<span class="pl-c1">LL</span> x, <span class="pl-c1">LL</span> fa) {
     <span class="pl-k">if</span> (x == bel[n]) <span class="pl-k">return</span> <span class="pl-c1">true</span>;
     <span class="pl-k">for</span> (<span class="pl-k">auto</span> [i, j] : v[x]) {
         <span class="pl-k">if</span> (i == fa) <span class="pl-k">continue</span>;
@@ -183,7 +183,7 @@ priority_queue&lt;tuple&lt;LL, LL, LL&gt;, vector&lt;tuple&lt;LL, LL, LL&gt;&gt;
     }
     path.<span class="pl-c1">clear</span>();
     <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>; i &lt;= m; i++) {
-        LL x, y;
+        <span class="pl-c1">LL</span> x, y;
         cin &gt;&gt; x &gt;&gt; y;
         e[i] = {x, y};
         g[x].<span class="pl-c1">emplace_back</span>(y, i);
@@ -191,7 +191,7 @@ priority_queue&lt;tuple&lt;LL, LL, LL&gt;, vector&lt;tuple&lt;LL, LL, LL&gt;&gt;
     }
     <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++) <span class="pl-k">if</span> (!dfn[i]) <span class="pl-c1">tarjan</span>(i, -<span class="pl-c1">1</span>);
     <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>; i &lt;= m; i++) {
-        LL x = e[i].<span class="pl-smi">first</span>, y = e[i].<span class="pl-smi">second</span>;
+        <span class="pl-c1">LL</span> x = e[i].<span class="pl-smi">first</span>, y = e[i].<span class="pl-smi">second</span>;
         <span class="pl-k">if</span> (bel[x] != bel[y]) {
             v[bel[x]].<span class="pl-c1">emplace_back</span>(bel[y], i);
             v[bel[y]].<span class="pl-c1">emplace_back</span>(bel[x], i);
@@ -200,9 +200,9 @@ priority_queue&lt;tuple&lt;LL, LL, LL&gt;, vector&lt;tuple&lt;LL, LL, LL&gt;&gt;
     <span class="pl-c1">dfs</span>(bel[<span class="pl-c1">1</span>], <span class="pl-c1">0</span>);
     <span class="pl-c1">dijkstra</span>();
     <span class="pl-c"><span class="pl-c">//</span>cout &lt;&lt; path.size() &lt;&lt; endl;</span>
-    LL Q; cin &gt;&gt; Q;
+    <span class="pl-c1">LL</span> Q; cin &gt;&gt; Q;
     <span class="pl-k">while</span> (Q--) {
-        LL x; cin &gt;&gt; x;
+        <span class="pl-c1">LL</span> x; cin &gt;&gt; x;
         cout &lt;&lt; (res[x] == <span class="pl-c1">0</span> ? -<span class="pl-c1">1</span> : res[x]) &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
     }
     cout &lt;&lt; endl;

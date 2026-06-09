@@ -100,11 +100,11 @@ $$k=0\Longrightarrow\space (s_1+t \bmod{3})\bmod{3}$$<br>
 $$\operatorname{dfs}(t,k)\Longrightarrow \operatorname{dfs}(t-1,(k+1)\div{2}+1+(k\bmod{2}))$$</p>
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-LL q,t,k,n;
+<span class="pl-c1">LL</span> q,t,k,n;
 string s;
-LL <span class="pl-en">dfs</span>(LL t,LL k){
+<span class="pl-c1">LL</span> <span class="pl-en">dfs</span>(<span class="pl-c1">LL</span> t,<span class="pl-c1">LL</span> k){
 	<span class="pl-k">if</span>(t==<span class="pl-c1">0</span>) <span class="pl-k">return</span> s[k]-<span class="pl-s"><span class="pl-pds">'</span>A<span class="pl-pds">'</span></span>;
 	<span class="pl-k">if</span>(k==<span class="pl-c1">1</span>) <span class="pl-k">return</span> (s[<span class="pl-c1">1</span>]-<span class="pl-s"><span class="pl-pds">'</span>A<span class="pl-pds">'</span></span>+t%<span class="pl-c1">3</span>)%<span class="pl-c1">3</span>;
     <span class="pl-k">return</span> (<span class="pl-c1">dfs</span>(t-<span class="pl-c1">1</span>,(k+<span class="pl-c1">1</span>)/<span class="pl-c1">2</span>)+<span class="pl-c1">1</span>+(k%<span class="pl-c1">2</span>))%<span class="pl-c1">3</span>;

@@ -92,11 +92,11 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n, m, ans = <span class="pl-c1">1e18</span>;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n, m, ans = <span class="pl-c1">1e18</span>;
 <span class="pl-k">bool</span> b[<span class="pl-c1">15</span>][<span class="pl-c1">15</span>], vis[<span class="pl-c1">15</span>], g[<span class="pl-c1">15</span>][<span class="pl-c1">15</span>];
-LL <span class="pl-en">calc</span>() {
-	LL cnt = <span class="pl-c1">0</span>;
+<span class="pl-c1">LL</span> <span class="pl-en">calc</span>() {
+	<span class="pl-c1">LL</span> cnt = <span class="pl-c1">0</span>;
 	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++){
 		<span class="pl-k">for</span> (<span class="pl-k">int</span> j = i + <span class="pl-c1">1</span>; j &lt;= n; j++){
 			<span class="pl-k">if</span> (b[i][j] &amp;&amp; !g[i][j] || !b[i][j] &amp;&amp; g[i][j])cnt++;
@@ -104,7 +104,7 @@ LL <span class="pl-en">calc</span>() {
 	}
 	<span class="pl-k">return</span> cnt;
 }
-<span class="pl-k">inline</span> <span class="pl-k">void</span> <span class="pl-en">dfs</span>(LL x) {
+<span class="pl-k">inline</span> <span class="pl-k">void</span> <span class="pl-en">dfs</span>(<span class="pl-c1">LL</span> x) {
 	<span class="pl-k">if</span> (x == n + <span class="pl-c1">1</span>) {
 		ans = <span class="pl-c1">min</span>(ans, <span class="pl-c1">calc</span>());
 		<span class="pl-k">return</span>;

@@ -97,11 +97,11 @@ $$\begin{cases}dp_{0,x}=\max(-val_x,-val_x+dp_{1,fa})\dp_{1,x}=\max(val_x,val_x+
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-<span class="pl-k">const</span> LL N=<span class="pl-c1">2e5</span>+<span class="pl-c1">5</span>;
-LL t,n, dp[<span class="pl-c1">2</span>][N],val[N];
-vector&lt;LL&gt; g[N];
-<span class="pl-k">void</span> <span class="pl-en">dfs</span>(LL x,LL fa){
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> N=<span class="pl-c1">2e5</span>+<span class="pl-c1">5</span>;
+<span class="pl-c1">LL</span> t,n, dp[<span class="pl-c1">2</span>][N],val[N];
+vector&lt;<span class="pl-c1">LL</span>&gt; g[N];
+<span class="pl-k">void</span> <span class="pl-en">dfs</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> fa){
     dp[<span class="pl-c1">1</span>][x]=<span class="pl-c1">max</span>(val[x],val[x]+dp[<span class="pl-c1">0</span>][fa]),dp[<span class="pl-c1">0</span>][x]=<span class="pl-c1">max</span>(-val[x],-val[x]+dp[<span class="pl-c1">1</span>][fa]);
     <span class="pl-k">for</span>(<span class="pl-k">auto</span> i : g[x]){
         <span class="pl-k">if</span>(i==fa) <span class="pl-k">continue</span>;

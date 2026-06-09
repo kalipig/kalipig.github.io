@@ -95,18 +95,18 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,a[<span class="pl-c1">500005</span>],lazy[<span class="pl-c1">500005</span>],len,L[<span class="pl-c1">500005</span>];
-vector&lt;LL&gt; v[<span class="pl-c1">50005</span>];
-<span class="pl-k">inline</span> LL <span class="pl-en">get</span>(LL x){
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,a[<span class="pl-c1">500005</span>],lazy[<span class="pl-c1">500005</span>],len,L[<span class="pl-c1">500005</span>];
+vector&lt;<span class="pl-c1">LL</span>&gt; v[<span class="pl-c1">50005</span>];
+<span class="pl-k">inline</span> <span class="pl-c1">LL</span> <span class="pl-en">get</span>(<span class="pl-c1">LL</span> x){
 	<span class="pl-k">return</span> x/len+<span class="pl-c1">1</span>;
 }
-<span class="pl-k">void</span> <span class="pl-en">resort</span>(LL x){
+<span class="pl-k">void</span> <span class="pl-en">resort</span>(<span class="pl-c1">LL</span> x){
 	<span class="pl-k">int</span> i=L[x];v[x].<span class="pl-c1">clear</span>();
 	<span class="pl-k">while</span>(<span class="pl-c1">get</span>(i)==x&amp;&amp;i&lt;=n) v[x].<span class="pl-c1">push_back</span>(a[i++]);
 	<span class="pl-c1">sort</span>(v[x].<span class="pl-c1">begin</span>(),v[x].<span class="pl-c1">end</span>());
 }
-<span class="pl-k">void</span> <span class="pl-en">update</span>(LL l,LL r,LL c){
+<span class="pl-k">void</span> <span class="pl-en">update</span>(<span class="pl-c1">LL</span> l,<span class="pl-c1">LL</span> r,<span class="pl-c1">LL</span> c){
 	<span class="pl-k">if</span>(<span class="pl-c1">get</span>(l)==<span class="pl-c1">get</span>(r)){
 		<span class="pl-k">for</span>(<span class="pl-k">int</span> i=l;i&lt;=r;i++) a[i]+=c;
 		<span class="pl-c1">resort</span>(<span class="pl-c1">get</span>(l));
@@ -118,8 +118,8 @@ vector&lt;LL&gt; v[<span class="pl-c1">50005</span>];
 		<span class="pl-k">for</span> (<span class="pl-k">int</span> k = <span class="pl-c1">get</span>(i);k &lt;= <span class="pl-c1">get</span>(j);k++) lazy[k] += c;
 	}
 }
-LL <span class="pl-en">query</span>(LL l,LL r,LL c){
-	LL res=<span class="pl-c1">0</span>;
+<span class="pl-c1">LL</span> <span class="pl-en">query</span>(<span class="pl-c1">LL</span> l,<span class="pl-c1">LL</span> r,<span class="pl-c1">LL</span> c){
+	<span class="pl-c1">LL</span> res=<span class="pl-c1">0</span>;
 	<span class="pl-k">if</span>(<span class="pl-c1">get</span>(l)==<span class="pl-c1">get</span>(r)){
 		<span class="pl-k">for</span>(<span class="pl-k">int</span> i=l;i&lt;=r;i++){
 			<span class="pl-k">if</span>(a[i]+lazy[<span class="pl-c1">get</span>(i)]&lt;c) res++;
@@ -139,15 +139,15 @@ LL <span class="pl-en">query</span>(LL l,LL r,LL c){
 	cin&gt;&gt;n;
 	len=<span class="pl-c1">int</span>(<span class="pl-c1">sqrt</span>(n));
 	<span class="pl-c1">memset</span>(L,<span class="pl-c1">0x3f</span>,<span class="pl-k">sizeof</span>(L));
-	<span class="pl-k">for</span>(LL i=<span class="pl-c1">1</span>;i&lt;=n;i++){
+	<span class="pl-k">for</span>(<span class="pl-c1">LL</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++){
 		cin&gt;&gt;a[i];
-		LL x=<span class="pl-c1">get</span>(i);
+		<span class="pl-c1">LL</span> x=<span class="pl-c1">get</span>(i);
 		L[x]=<span class="pl-c1">min</span>(L[x],i);
 		v[x].<span class="pl-c1">push_back</span>(a[i]); 
 	}
 	<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=n/len;i++) <span class="pl-c1">sort</span>(v[i].<span class="pl-c1">begin</span>(),v[i].<span class="pl-c1">end</span>());
 	<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++){
-		LL l,r,c,op;
+		<span class="pl-c1">LL</span> l,r,c,op;
 		cin&gt;&gt;op&gt;&gt;l&gt;&gt;r&gt;&gt;c;
 		<span class="pl-k">if</span>(op) cout&lt;&lt;<span class="pl-c1">query</span>(l,r,c*c)&lt;&lt;endl;
 		<span class="pl-k">else</span>{

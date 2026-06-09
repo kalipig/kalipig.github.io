@@ -94,41 +94,41 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 最后算它自己。<br>
 计算位数和的原理就是先算有多少个，比如 $100\rarr 999$ 也就是三位数有 $9\times100$ 个，然后每个数字 $1\rarr9$ 会出现 $3\times 9$ 次，总和就是 $3\times45$，这里的 $45$ 就是数字 $1\rarr9$ 的和，下面代码里也是这个意思。</p>
 <h3>Code</h3>
-<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL <span class="pl-en">calc</span>(LL n) {<span class="pl-c"><span class="pl-c">//</span>计算 n 位数的和</span>
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> <span class="pl-en">calc</span>(<span class="pl-c1">LL</span> n) {<span class="pl-c"><span class="pl-c">//</span>计算 n 位数的和</span>
     <span class="pl-k">if</span> (n &lt;= <span class="pl-c1">0</span>) <span class="pl-k">return</span> <span class="pl-c1">0</span>;
     <span class="pl-k">if</span> (n &lt; <span class="pl-c1">10</span>) <span class="pl-k">return</span> n * (n + <span class="pl-c1">1</span>) / <span class="pl-c1">2</span>; <span class="pl-c"><span class="pl-c">//</span>小于10直接输出，为什么去看后面</span>
-    LL base = <span class="pl-c1">1</span>;
+    <span class="pl-c1">LL</span> base = <span class="pl-c1">1</span>;
     <span class="pl-k">int</span> len = <span class="pl-c1">0</span>;
     <span class="pl-k">while</span> (base * <span class="pl-c1">10</span> &lt;= n) {<span class="pl-c"><span class="pl-c">//</span>确定位数</span>
         base *= <span class="pl-c1">10</span>;
         len++;
     }
-    LL first = n / base;<span class="pl-c"><span class="pl-c">//</span>首位</span>
-    LL  r = n % base;<span class="pl-c"><span class="pl-c">//</span>剩下的数字</span>
-    LL len = (LL)len * <span class="pl-c1">45</span> * (base / <span class="pl-c1">10</span>);<span class="pl-c"><span class="pl-c">//</span>其实是 len*9/2*base但是因为base是10的倍数所以可以这样防止小数</span>
-    LL p1 = (LL)first * (first - <span class="pl-c1">1</span>) / <span class="pl-c1">2</span> * base + first * len;<span class="pl-c"><span class="pl-c">//</span></span>
-    LL p2 = first * ( r + <span class="pl-c1">1</span>) + <span class="pl-c1">calc</span>( r);<span class="pl-c"><span class="pl-c">//</span>答案就是当前位的加上小一位的</span>
+    <span class="pl-c1">LL</span> first = n / base;<span class="pl-c"><span class="pl-c">//</span>首位</span>
+    <span class="pl-c1">LL</span>  r = n % base;<span class="pl-c"><span class="pl-c">//</span>剩下的数字</span>
+    <span class="pl-c1">LL</span> len = (<span class="pl-c1">LL</span>)len * <span class="pl-c1">45</span> * (base / <span class="pl-c1">10</span>);<span class="pl-c"><span class="pl-c">//</span>其实是 len*9/2*base但是因为base是10的倍数所以可以这样防止小数</span>
+    <span class="pl-c1">LL</span> p1 = (<span class="pl-c1">LL</span>)first * (first - <span class="pl-c1">1</span>) / <span class="pl-c1">2</span> * base + first * len;<span class="pl-c"><span class="pl-c">//</span></span>
+    <span class="pl-c1">LL</span> p2 = first * ( r + <span class="pl-c1">1</span>) + <span class="pl-c1">calc</span>( r);<span class="pl-c"><span class="pl-c">//</span>答案就是当前位的加上小一位的</span>
     <span class="pl-k">return</span> p1 + p2;
 }
 <span class="pl-k">void</span> <span class="pl-en">solve</span>(){
-    LL k;
+    <span class="pl-c1">LL</span> k;
     cin &gt;&gt; k;
     <span class="pl-k">int</span> d = <span class="pl-c1">1</span>;
-    LL base = <span class="pl-c1">1</span>;
+    <span class="pl-c1">LL</span> base = <span class="pl-c1">1</span>;
     <span class="pl-k">while</span> (k &gt; <span class="pl-c1">9</span> * base * d) {
         k -= <span class="pl-c1">9</span> * base * d;
         d++;
         base *= <span class="pl-c1">10</span>;
     }
-    LL  st = base;<span class="pl-c"><span class="pl-c">//</span>确定位数</span>
-    LL index = (k - <span class="pl-c1">1</span>) / d;<span class="pl-c"><span class="pl-c">//</span>首位</span>
-    LL  r = (k - <span class="pl-c1">1</span>) % d + <span class="pl-c1">1</span>;<span class="pl-c"><span class="pl-c">//</span>包含第 k 位的数剩下的位数</span>
-    LL num =  st + index;<span class="pl-c"><span class="pl-c">//</span>包含第 k 位剩下的数字</span>
-    LL p1 = <span class="pl-c1">calc</span>( st - <span class="pl-c1">1</span>);<span class="pl-c"><span class="pl-c">//</span>计算位数小的那个部分</span>
-    LL p2 = <span class="pl-c1">calc</span>( st + index - <span class="pl-c1">1</span>) - <span class="pl-c1">calc</span>( st - <span class="pl-c1">1</span>);<span class="pl-c"><span class="pl-c">//</span>和自己数位相同的减去大的部分</span>
+    <span class="pl-c1">LL</span>  st = base;<span class="pl-c"><span class="pl-c">//</span>确定位数</span>
+    <span class="pl-c1">LL</span> index = (k - <span class="pl-c1">1</span>) / d;<span class="pl-c"><span class="pl-c">//</span>首位</span>
+    <span class="pl-c1">LL</span>  r = (k - <span class="pl-c1">1</span>) % d + <span class="pl-c1">1</span>;<span class="pl-c"><span class="pl-c">//</span>包含第 k 位的数剩下的位数</span>
+    <span class="pl-c1">LL</span> num =  st + index;<span class="pl-c"><span class="pl-c">//</span>包含第 k 位剩下的数字</span>
+    <span class="pl-c1">LL</span> p1 = <span class="pl-c1">calc</span>( st - <span class="pl-c1">1</span>);<span class="pl-c"><span class="pl-c">//</span>计算位数小的那个部分</span>
+    <span class="pl-c1">LL</span> p2 = <span class="pl-c1">calc</span>( st + index - <span class="pl-c1">1</span>) - <span class="pl-c1">calc</span>( st - <span class="pl-c1">1</span>);<span class="pl-c"><span class="pl-c">//</span>和自己数位相同的减去大的部分</span>
     string s = <span class="pl-c1">to_string</span>(num);<span class="pl-c"><span class="pl-c">//</span>快速计算位数和</span>
-    LL p3 = <span class="pl-c1">0</span>;
+    <span class="pl-c1">LL</span> p3 = <span class="pl-c1">0</span>;
     <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt;  r; i++) {
         p3 += s[i] - <span class="pl-s"><span class="pl-pds">'</span>0<span class="pl-pds">'</span></span>;
     }

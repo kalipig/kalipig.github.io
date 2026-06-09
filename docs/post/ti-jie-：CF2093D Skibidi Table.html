@@ -92,12 +92,12 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Solution</h3>
 <p>分制模版题，先处理第一个问题。定义搜索状态 ${dfs}(x,y,l,mn,mx)$ 表示当前在 $(x,y)$ 这个位置，当前块的边长为 $l$，当前块内的最大和最小值 $mx,mn$。</p>
 <p>初始从最大的那个也就是右下角开始。</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">query1</span>(LL x,LL y,LL l,LL mn,LL mx){
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">query1</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> y,<span class="pl-c1">LL</span> l,<span class="pl-c1">LL</span> mn,<span class="pl-c1">LL</span> mx){
     <span class="pl-k">if</span>(l==<span class="pl-c1">1</span>){<span class="pl-c"><span class="pl-c">//</span>找到</span>
         cout&lt;&lt;mn&lt;&lt;endl;
         <span class="pl-k">return</span> ;
     }
-    LL len=mx-mn+<span class="pl-c1">1</span>;<span class="pl-c"><span class="pl-c">//</span>方便处理</span>
+    <span class="pl-c1">LL</span> len=mx-mn+<span class="pl-c1">1</span>;<span class="pl-c"><span class="pl-c">//</span>方便处理</span>
     <span class="pl-k">if</span>(x&lt;=l/<span class="pl-c1">2</span>&amp;&amp;y&lt;=l/<span class="pl-c1">2</span>){<span class="pl-c"><span class="pl-c">//</span>左上角</span>
         <span class="pl-c1">query1</span>(x,y,l/<span class="pl-c1">2</span>,mn,mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>);
     }
@@ -113,12 +113,12 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 }</pre></div>
 <p>在第二个问题中只需要加上当前查找的值 $d$ 即可。</p>
 <p>从左上角开始，找范围。</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">query2</span>(LL x,LL y,LL l,LL d,LL mn,LL mx){
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">query2</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> y,<span class="pl-c1">LL</span> l,<span class="pl-c1">LL</span> d,<span class="pl-c1">LL</span> mn,<span class="pl-c1">LL</span> mx){
     <span class="pl-k">if</span>(l==<span class="pl-c1">1</span>){
         cout&lt;&lt;x&lt;&lt;<span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>&lt;&lt;y&lt;&lt;endl;
         <span class="pl-k">return</span> ;
     }
-    LL len=mx-mn+<span class="pl-c1">1</span>;
+    <span class="pl-c1">LL</span> len=mx-mn+<span class="pl-c1">1</span>;
     <span class="pl-k">if</span>(d&lt;=mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>){
         <span class="pl-c1">query2</span>(x,y,l/<span class="pl-c1">2</span>,d,mn,mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>);
     }
@@ -135,14 +135,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,q,t,pw[<span class="pl-c1">100</span>]={<span class="pl-c1">1</span>};
-<span class="pl-k">void</span> <span class="pl-en">query1</span>(LL x,LL y,LL l,LL mn,LL mx){
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,q,t,pw[<span class="pl-c1">100</span>]={<span class="pl-c1">1</span>};
+<span class="pl-k">void</span> <span class="pl-en">query1</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> y,<span class="pl-c1">LL</span> l,<span class="pl-c1">LL</span> mn,<span class="pl-c1">LL</span> mx){
     <span class="pl-k">if</span>(l==<span class="pl-c1">1</span>){
         cout&lt;&lt;mn&lt;&lt;endl;
         <span class="pl-k">return</span> ;
     }
-    LL len=mx-mn+<span class="pl-c1">1</span>;
+    <span class="pl-c1">LL</span> len=mx-mn+<span class="pl-c1">1</span>;
     <span class="pl-k">if</span>(x&lt;=l/<span class="pl-c1">2</span>&amp;&amp;y&lt;=l/<span class="pl-c1">2</span>){
         <span class="pl-c1">query1</span>(x,y,l/<span class="pl-c1">2</span>,mn,mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>);
     }
@@ -156,13 +156,13 @@ LL n,q,t,pw[<span class="pl-c1">100</span>]={<span class="pl-c1">1</span>};
         <span class="pl-c1">query1</span>(x,y-l/<span class="pl-c1">2</span>,l/<span class="pl-c1">2</span>,mn+len/<span class="pl-c1">4</span>*<span class="pl-c1">3</span>,mx);
     }
 }
-<span class="pl-k">void</span> <span class="pl-en">query2</span>(LL x,LL y,LL l,LL d,LL mn,LL mx){
+<span class="pl-k">void</span> <span class="pl-en">query2</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> y,<span class="pl-c1">LL</span> l,<span class="pl-c1">LL</span> d,<span class="pl-c1">LL</span> mn,<span class="pl-c1">LL</span> mx){
     <span class="pl-c"><span class="pl-c">//</span>cout&lt;&lt;x&lt;&lt;' '&lt;&lt;y&lt;&lt;endl;</span>
     <span class="pl-k">if</span>(l==<span class="pl-c1">1</span>){
         cout&lt;&lt;x&lt;&lt;<span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>&lt;&lt;y&lt;&lt;endl;
         <span class="pl-k">return</span> ;
     }
-    LL len=mx-mn+<span class="pl-c1">1</span>;
+    <span class="pl-c1">LL</span> len=mx-mn+<span class="pl-c1">1</span>;
     <span class="pl-k">if</span>(d&lt;=mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>){
         <span class="pl-c1">query2</span>(x,y,l/<span class="pl-c1">2</span>,d,mn,mn+len/<span class="pl-c1">4</span>-<span class="pl-c1">1</span>);
     }
@@ -182,7 +182,7 @@ LL n,q,t,pw[<span class="pl-c1">100</span>]={<span class="pl-c1">1</span>};
     <span class="pl-k">while</span>(t--){
         cin&gt;&gt;n&gt;&gt;q;
         <span class="pl-k">while</span>(q--){
-            LL x,y;<span class="pl-k">char</span> c1,c2;
+            <span class="pl-c1">LL</span> x,y;<span class="pl-k">char</span> c1,c2;
             cin&gt;&gt;c1&gt;&gt;c2;
             <span class="pl-k">if</span>(c1==<span class="pl-s"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>){
                 cin&gt;&gt;x&gt;&gt;y;

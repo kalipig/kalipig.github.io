@@ -95,25 +95,25 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL a[<span class="pl-c1">500005</span>];
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> a[<span class="pl-c1">500005</span>];
 
 <span class="pl-k">void</span> <span class="pl-en">solve</span>(){
-    LL n,q;
+    <span class="pl-c1">LL</span> n,q;
     cin&gt;&gt;n&gt;&gt;q;
     <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];
-    <span class="pl-c1">sort</span>(a+<span class="pl-c1">1</span>,a+n+<span class="pl-c1">1</span>,greater&lt;LL&gt;());
+    <span class="pl-c1">sort</span>(a+<span class="pl-c1">1</span>,a+n+<span class="pl-c1">1</span>,greater&lt;<span class="pl-c1">LL</span>&gt;());
     
     <span class="pl-k">while</span>(q--){
-        LL k;
+        <span class="pl-c1">LL</span> k;
         cin&gt;&gt;k;
-        LL ans=<span class="pl-c1">0</span>;
-        priority_queue&lt;LL,vector&lt;LL&gt; &gt; q;
+        <span class="pl-c1">LL</span> ans=<span class="pl-c1">0</span>;
+        priority_queue&lt;<span class="pl-c1">LL</span>,vector&lt;<span class="pl-c1">LL</span>&gt; &gt; q;
         <span class="pl-k">int</span> j=<span class="pl-c1">1</span>;
         
         <span class="pl-k">for</span>(<span class="pl-k">int</span> i=(<span class="pl-c1">1</span>&lt;&lt;<span class="pl-c1">30</span>);i&gt;=<span class="pl-c1">1</span>;i&gt;&gt;=<span class="pl-c1">1</span>){
             <span class="pl-k">if</span>(k&gt;=i){
-                LL mx;
+                <span class="pl-c1">LL</span> mx;
                 <span class="pl-k">bool</span> from_array=<span class="pl-c1">false</span>;
                 <span class="pl-k">if</span>(j&lt;=n&amp;&amp;(q.<span class="pl-c1">empty</span>()||a[j]&gt;=q.<span class="pl-c1">top</span>())){
                     mx=a[j];

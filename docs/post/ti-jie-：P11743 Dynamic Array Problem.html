@@ -95,8 +95,8 @@ $$dp_{i,j}=\max(\max_{k=0}^{k&amp;lt;i}\space dp_{k,j}+val_{k+1,i},\space \max_{
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n,a[<span class="pl-c1">605</span>],val[<span class="pl-c1">605</span>][<span class="pl-c1">605</span>],vall[<span class="pl-c1">605</span>][<span class="pl-c1">605</span>],dp[<span class="pl-c1">605</span>][<span class="pl-c1">605</span>],m;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n,a[<span class="pl-c1">605</span>],val[<span class="pl-c1">605</span>][<span class="pl-c1">605</span>],vall[<span class="pl-c1">605</span>][<span class="pl-c1">605</span>],dp[<span class="pl-c1">605</span>][<span class="pl-c1">605</span>],m;
 <span class="pl-k">int</span> <span class="pl-en">main</span>(){
     <span class="pl-c1">ios::sync_with_stdio</span>(<span class="pl-c1">false</span>);cin.<span class="pl-c1">tie</span>(<span class="pl-c1">nullptr</span>);cout.<span class="pl-c1">tie</span>(<span class="pl-c1">nullptr</span>);
     cin&gt;&gt;n&gt;&gt;m;
@@ -115,7 +115,7 @@ LL n,a[<span class="pl-c1">605</span>],val[<span class="pl-c1">605</span>][<span
             }
         }
     }
-    <span class="pl-k">for</span>(LL i=<span class="pl-c1">1</span>;i&lt;=n;i++){
+    <span class="pl-k">for</span>(<span class="pl-c1">LL</span> i=<span class="pl-c1">1</span>;i&lt;=n;i++){
         <span class="pl-k">for</span>(<span class="pl-k">int</span> k=<span class="pl-c1">0</span>;k&lt;=m;k++) dp[i][k]=-<span class="pl-c1">1e14</span>;
         <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">0</span>;j&lt;i;j++){
             <span class="pl-k">for</span>(<span class="pl-k">int</span> k=<span class="pl-c1">0</span>;k&lt;=<span class="pl-c1">min</span>(i,m);k++){
@@ -128,7 +128,7 @@ LL n,a[<span class="pl-c1">605</span>],val[<span class="pl-c1">605</span>][<span
             }
         }
     }
-    LL ans=-<span class="pl-c1">1e14</span>;
+    <span class="pl-c1">LL</span> ans=-<span class="pl-c1">1e14</span>;
     <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;=m;i++) ans=<span class="pl-c1">max</span>(ans,dp[n][i]);
     cout&lt;&lt;ans;
     <span class="pl-k">return</span> <span class="pl-c1">0</span>;

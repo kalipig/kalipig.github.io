@@ -98,7 +98,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>1</h3>
 <p>作者不太会用 <code class="notranslate">define</code>，如果你也一样那么 <code class="notranslate">using</code> 会很适合你。</p>
 <p>调整到 <code class="notranslate">C++14</code> 及以后的版本。我一般喜欢写：</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;<span class="pl-c"><span class="pl-c">//</span>直接写在头文件下面</span>
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;<span class="pl-c"><span class="pl-c">//</span>直接写在头文件下面</span>
 <span class="pl-c"><span class="pl-c">//</span>using identifier attr (optional) = type-id ;</span></pre></div>
 <p>应该很容易看懂，就是把 <code class="notranslate">LL</code> 代替 <code class="notranslate">long long</code>，但是就是只能用来代替数据类型，自由度要比 <code class="notranslate">define</code> 差一些。</p>
 <h3>2</h3>
@@ -106,15 +106,15 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-en">ios::sync_with_stdio</span>(<span class="pl-c1">false</span>);cin.tie(<span class="pl-c1">nullptr</span>);cout.tie(<span class="pl-c1">nullptr</span>);
 cout&lt;&lt;fixed&lt;&lt;setprecision&lt;&lt;(n)&lt;&lt;x;<span class="pl-c"><span class="pl-c">//</span>这是输出x保留n位小数</span></pre></div>
 <p>但是有些时候还是需要快读，通常是读入量超过 $10^7$ 的时候，其实一般不会有这么多输出，这是我的快读模板；</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">LL res=<span class="pl-c1">0</span>,f=<span class="pl-c1">1</span>;<span class="pl-k">char</span> c=getchar();
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-c1">LL</span> res=<span class="pl-c1">0</span>,f=<span class="pl-c1">1</span>;<span class="pl-k">char</span> c=getchar();
 <span class="pl-k">while</span>(c&lt;<span class="pl-s"><span class="pl-pds">'</span>0<span class="pl-pds">'</span></span>||c&gt;<span class="pl-s"><span class="pl-pds">'</span>9<span class="pl-pds">'</span></span>){<span class="pl-k">if</span>(c==<span class="pl-s"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>) f=-<span class="pl-c1">1</span>;c=<span class="pl-c1">getchar</span>();};
 <span class="pl-k">while</span>(c&gt;=<span class="pl-s"><span class="pl-pds">'</span>0<span class="pl-pds">'</span></span>&amp;&amp;c&lt;=<span class="pl-s"><span class="pl-pds">'</span>9<span class="pl-pds">'</span></span>){res=(res&lt;&lt;<span class="pl-c1">3</span>)+(res&lt;&lt;<span class="pl-c1">1</span>)+c-<span class="pl-s"><span class="pl-pds">'</span>0<span class="pl-pds">'</span></span>;};
 <span class="pl-k">return</span> res*f;</pre></div>
 <h3>3</h3>
 <p>平时的模拟赛一般还是用数组稳当一些，毕竟空间大小确定，而且常数小，在函数调用时方便传参。但是有些时候，特别是做 <code class="notranslate">CF</code> 的题的时候，数据量不大，也不卡常，用 <code class="notranslate">vector</code> 是一个不错的选择，如果你之前不怎么用，可以试试下面几个常用操作：</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">vector&lt;LL&gt; a;<span class="pl-c"><span class="pl-c">//</span>定义一个空的vector，可以用push_back来添加元素。</span>
-vector&lt;LL&gt; <span class="pl-en">a</span>(n);<span class="pl-c"><span class="pl-c">//</span>大小为n，注意和数组一样这里是指 0 -- n-1，所以记得要比实际的大一下。</span>
-vector&lt;LL&gt; <span class="pl-en">a</span>(n,x);<span class="pl-c"><span class="pl-c">//</span>所以元素初值为x</span>
+<div class="highlight highlight-source-c++"><pre class="notranslate">vector&lt;<span class="pl-c1">LL</span>&gt; a;<span class="pl-c"><span class="pl-c">//</span>定义一个空的vector，可以用push_back来添加元素。</span>
+vector&lt;<span class="pl-c1">LL</span>&gt; <span class="pl-en">a</span>(n);<span class="pl-c"><span class="pl-c">//</span>大小为n，注意和数组一样这里是指 0 -- n-1，所以记得要比实际的大一下。</span>
+vector&lt;<span class="pl-c1">LL</span>&gt; <span class="pl-en">a</span>(n,x);<span class="pl-c"><span class="pl-c">//</span>所以元素初值为x</span>
 a.assign(n,x);<span class="pl-c"><span class="pl-c">//</span>重新初始化</span>
 sort/lower_bound/unique/...(a.begin(),a.end());<span class="pl-c"><span class="pl-c">//</span>在函数中调用时</span></pre></div>
 <h3>4</h3>
@@ -123,7 +123,7 @@ sort/lower_bound/unique/...(a.begin(),a.end());<span class="pl-c"><span class="p
 <p>离散化的写法很多，有些用存下标的方法，但是二分查找更方便写，而且其实你只需要两行就秒了：</p>
 <div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-en">sort</span>(a.begin(),a.end());<span class="pl-c"><span class="pl-c">//</span>这里a是一个vector。</span>
 a.erase(unique(a.begin(),a.end()),a.end());
-LL k=lower_bound(a.begin(),a.end(),x)-a.begin()+<span class="pl-c1">1</span>;<span class="pl-c"><span class="pl-c">//</span>x离散化后的数为k</span></pre></div>
+<span class="pl-c1">LL</span> k=lower_bound(a.begin(),a.end(),x)-a.begin()+<span class="pl-c1">1</span>;<span class="pl-c"><span class="pl-c">//</span>x离散化后的数为k</span></pre></div>
 <h3>6</h3>
 <p>有时候需要在不同的函数里面调用同名但是不同的函数，或者为了方便，或者为了在函数中使用没有全局定义的变量又不想传参，就可以试试 <code class="notranslate">std::function</code>，其实跑的比一般递归要快。<br>
 先来看看不递归的怎么写：</p>
@@ -135,7 +135,7 @@ auto p=check("happypigIG");//p=0
 sort(a+1,a+n+1,[](){return };);//也可以挂在sort,lower_bound等后面用
 </code></pre>
 <p>然后如果你想要递归，就要每次都调用自己，但是自己都还没有定义怎么调用，那就吧自己当成参数：</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">auto</span> dfs=[&amp;](<span class="pl-k">auto</span> self,LL x)-&gt;<span class="pl-k">void</span>{<span class="pl-c"><span class="pl-c">//</span> [&amp;] 只会捕获用到的变量，所以不会捕获 auto dfs</span>
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">auto</span> dfs=[&amp;](<span class="pl-k">auto</span> self,<span class="pl-c1">LL</span> x)-&gt;<span class="pl-k">void</span>{<span class="pl-c"><span class="pl-c">//</span> [&amp;] 只会捕获用到的变量，所以不会捕获 auto dfs</span>
   <span class="pl-k">if</span> (x==y) <span class="pl-k">return</span>;
   <span class="pl-k">else</span> <span class="pl-c1">self</span>(self, x+<span class="pl-c1">1</span>);
 };
@@ -143,12 +143,12 @@ sort(a+1,a+n+1,[](){return };);//也可以挂在sort,lower_bound等后面用
 <p>这样就不用怕 $y$ 不是全局变量了，也能让代码看起来简单一些。</p>
 <h3>7</h3>
 <p>很多时候，其实你会发现 <code class="notranslate">memset</code> 这个东西一点都不好用，难写，能赋的值很少，只能赋值整个数组，一般不是常数。我们如果用 <code class="notranslate">fill</code> 就可以了，其实她的底层原理还是 <code class="notranslate">memset</code>：</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">LL a[<span class="pl-c1">10</span>];
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-c1">LL</span> a[<span class="pl-c1">10</span>];
 <span class="pl-en">fill</span>(a+<span class="pl-c1">1</span>,a+<span class="pl-c1">10</span>,<span class="pl-c1">2</span>);<span class="pl-c"><span class="pl-c">//</span>std::fill(LL *__first, LL *__last, const int &amp;__value)</span></pre></div>
 <h3>8</h3>
 <p>重载运算符，通常用在结构体的时候，一个很有用的地方就是在线段树查询的时候如果返回值是一个结构体，大家是不是在合并两边的 $res$ 的时候还要再写一遍 <code class="notranslate">pushup</code> 里的内容。但是在定义结构体的时候就可以重载，比如我们要同时维护和和最大值：</p>
 <div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">struct</span> <span class="pl-en">node</span>{
-    LL sum,mx;
+    <span class="pl-c1">LL</span> sum,mx;
     <span class="pl-k">friend</span> node <span class="pl-k">operator</span>+(node x,node y){<span class="pl-c"><span class="pl-c">//</span>这里的node是指返回值的类型，如果你想重载&lt;,=或&gt;，就用bool</span>
         node res;
         res.<span class="pl-smi">sum</span>=x.<span class="pl-smi">sum</span>+y.<span class="pl-smi">sum</span>;
@@ -168,7 +168,7 @@ sort(a+1,a+n+1,[](){return };);//也可以挂在sort,lower_bound等后面用
 <h3>10</h3>
 <p>在写多组数据的题不想单独开函数就想写在主函数里而且不想写while的话：</p>
 <div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">int</span> <span class="pl-en">main</span>() {
-    <span class="pl-k">static</span> LL t = -<span class="pl-c1">1</span>;
+    <span class="pl-k">static</span> <span class="pl-c1">LL</span> t = -<span class="pl-c1">1</span>;
     <span class="pl-k">if</span> (t == -<span class="pl-c1">1</span>) {
         cin &gt;&gt; T;
     }
@@ -181,12 +181,12 @@ sort(a+1,a+n+1,[](){return };);//也可以挂在sort,lower_bound等后面用
     #<span class="pl-k">define</span> <span class="pl-en">lson</span> l,mid,x&lt;&lt;<span class="pl-c1">1</span>
     #<span class="pl-k">define</span> <span class="pl-en">rson</span> mid+<span class="pl-c1">1</span>,r,x&lt;&lt;<span class="pl-c1">1</span>|<span class="pl-c1">1</span>
     #<span class="pl-k">define</span> <span class="pl-en">mid</span> ((l+r)&gt;&gt;<span class="pl-c1">1</span>)
-    LL tr[<span class="pl-c1">400005</span>];
-    <span class="pl-k">void</span> <span class="pl-en">pushup</span>(LL x){
+    <span class="pl-c1">LL</span> tr[<span class="pl-c1">400005</span>];
+    <span class="pl-k">void</span> <span class="pl-en">pushup</span>(<span class="pl-c1">LL</span> x){
         tr[x]=<span class="pl-c1">max</span>(tr[x&lt;&lt;<span class="pl-c1">1</span>],tr[x&lt;&lt;<span class="pl-c1">1</span>|<span class="pl-c1">1</span>]);
     }
 
-    <span class="pl-k">void</span> <span class="pl-en">update</span>(LL L,LL R,LL d,LL l,LL r,LL x){
+    <span class="pl-k">void</span> <span class="pl-en">update</span>(<span class="pl-c1">LL</span> L,<span class="pl-c1">LL</span> R,<span class="pl-c1">LL</span> d,<span class="pl-c1">LL</span> l,<span class="pl-c1">LL</span> r,<span class="pl-c1">LL</span> x){
         <span class="pl-k">if</span>(L&lt;=l&amp;&amp;r&lt;=R){
             tr[x]=d;
             <span class="pl-k">return</span> ;
@@ -196,11 +196,11 @@ sort(a+1,a+n+1,[](){return };);//也可以挂在sort,lower_bound等后面用
         <span class="pl-c1">pushup</span>(x);
     }
 
-    LL <span class="pl-en">query</span>(LL L,LL R,LL l,LL r,LL x){
+    <span class="pl-c1">LL</span> <span class="pl-en">query</span>(<span class="pl-c1">LL</span> L,<span class="pl-c1">LL</span> R,<span class="pl-c1">LL</span> l,<span class="pl-c1">LL</span> r,<span class="pl-c1">LL</span> x){
         <span class="pl-k">if</span>(L&lt;=l&amp;&amp;r&lt;=R){
             <span class="pl-k">return</span> tr[x];
         }
-        LL res=<span class="pl-c1">0</span>;
+        <span class="pl-c1">LL</span> res=<span class="pl-c1">0</span>;
         <span class="pl-k">if</span>(L&lt;=mid) res=<span class="pl-c1">max</span>(res,<span class="pl-c1">query</span>(L,R,lson));
         <span class="pl-k">if</span>(mid&lt;R) res=<span class="pl-c1">max</span>(res,<span class="pl-c1">query</span>(L,R,rson));
         <span class="pl-k">return</span> res;

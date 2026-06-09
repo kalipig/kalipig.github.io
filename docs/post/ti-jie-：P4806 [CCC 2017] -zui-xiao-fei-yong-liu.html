@@ -116,36 +116,36 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>代码</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL = <span class="pl-k">long</span> <span class="pl-k">long</span>;
-LL n, m, d, ans, F[<span class="pl-c1">200005</span>], p, q;
+<span class="pl-k">using</span> <span class="pl-c1">LL</span> = <span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-c1">LL</span> n, m, d, ans, F[<span class="pl-c1">200005</span>], p, q;
 <span class="pl-k">struct</span> <span class="pl-en">node</span> {
-    LL u, v, w, A;
+    <span class="pl-c1">LL</span> u, v, w, A;
 } a[<span class="pl-c1">200005</span>];
-vector&lt;LL&gt; rec;
+vector&lt;<span class="pl-c1">LL</span>&gt; rec;
 
 <span class="pl-k">bool</span> <span class="pl-en">unite</span>(node P, node Q) {
     <span class="pl-k">if</span> (P.<span class="pl-smi">w</span> == Q.<span class="pl-smi">w</span>) <span class="pl-k">return</span> P.<span class="pl-smi">A</span> &lt; Q.<span class="pl-smi">A</span>;
     <span class="pl-k">return</span> P.<span class="pl-smi">w</span> &lt; Q.<span class="pl-smi">w</span>;
 }
 
-LL <span class="pl-en">find</span>(LL x) {
+<span class="pl-c1">LL</span> <span class="pl-en">find</span>(<span class="pl-c1">LL</span> x) {
     <span class="pl-k">return</span> F[x] == x ? x : F[x] = <span class="pl-c1">find</span>(F[x]);
 }
 
 <span class="pl-k">int</span> <span class="pl-en">main</span>() {
     cin &gt;&gt; n &gt;&gt; m &gt;&gt; d;
-    <span class="pl-k">for</span> (LL i = <span class="pl-c1">1</span>; i &lt;= n; i++) F[i] = i;
-    <span class="pl-k">for</span> (LL i = <span class="pl-c1">1</span>; i &lt;= m; i++) cin &gt;&gt; a[i].<span class="pl-smi">u</span> &gt;&gt; a[i].<span class="pl-smi">v</span> &gt;&gt; a[i].<span class="pl-smi">w</span>, a[i].<span class="pl-smi">A</span> = i;
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++) F[i] = i;
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i = <span class="pl-c1">1</span>; i &lt;= m; i++) cin &gt;&gt; a[i].<span class="pl-smi">u</span> &gt;&gt; a[i].<span class="pl-smi">v</span> &gt;&gt; a[i].<span class="pl-smi">w</span>, a[i].<span class="pl-smi">A</span> = i;
     <span class="pl-c1">sort</span>(a + <span class="pl-c1">1</span>, a + m + <span class="pl-c1">1</span>, unite);
     
-    <span class="pl-k">for</span> (LL i = <span class="pl-c1">1</span>; i &lt;= m; i++) {
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i = <span class="pl-c1">1</span>; i &lt;= m; i++) {
         p = <span class="pl-c1">find</span>(a[i].<span class="pl-smi">u</span>), q = <span class="pl-c1">find</span>(a[i].<span class="pl-smi">v</span>);
         <span class="pl-k">if</span> (p == q) <span class="pl-k">continue</span>;
         F[p] = q;
         rec.<span class="pl-c1">push_back</span>(a[i].<span class="pl-smi">A</span>);
         
         <span class="pl-k">if</span> (rec.<span class="pl-c1">size</span>() == n - <span class="pl-c1">1</span> &amp;&amp; a[i].<span class="pl-smi">A</span> &gt;= n &amp;&amp; a[i].<span class="pl-smi">w</span> &lt; d) {
-            <span class="pl-k">for</span> (LL j = i + <span class="pl-c1">1</span>; j &lt;= m; j++)
+            <span class="pl-k">for</span> (<span class="pl-c1">LL</span> j = i + <span class="pl-c1">1</span>; j &lt;= m; j++)
                 <span class="pl-k">if</span> (a[j].<span class="pl-smi">A</span> &lt;= n &amp;&amp; a[j].<span class="pl-smi">w</span> &lt;= d) {
                     ans--;
                     <span class="pl-k">break</span>;
@@ -153,7 +153,7 @@ LL <span class="pl-en">find</span>(LL x) {
             <span class="pl-k">break</span>;
         }
     }
-    <span class="pl-k">for</span> (LL i : rec) <span class="pl-k">if</span> (i &gt;= n) ans++;
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i : rec) <span class="pl-k">if</span> (i &gt;= n) ans++;
     cout &lt;&lt; ans;
 	<span class="pl-k">return</span> <span class="pl-c1">0</span>;
 }

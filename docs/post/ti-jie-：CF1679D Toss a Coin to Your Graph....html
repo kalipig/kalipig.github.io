@@ -98,42 +98,42 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL = <span class="pl-k">long</span> <span class="pl-k">long</span>;
-<span class="pl-k">const</span> LL N = <span class="pl-c1">2e5</span> + <span class="pl-c1">10</span>;
-vector&lt;vector&lt;LL&gt;&gt; <span class="pl-en">g</span>(N);
-LL n, m, a[N],k,ind[N], f[N];
-pair&lt;LL, LL&gt; E[N]; 
-<span class="pl-k">void</span> <span class="pl-en">addEdge</span>(LL u, LL v) {
+<span class="pl-k">using</span> <span class="pl-c1">LL</span> = <span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> N = <span class="pl-c1">2e5</span> + <span class="pl-c1">10</span>;
+vector&lt;vector&lt;<span class="pl-c1">LL</span>&gt;&gt; <span class="pl-en">g</span>(N);
+<span class="pl-c1">LL</span> n, m, a[N],k,ind[N], f[N];
+pair&lt;<span class="pl-c1">LL</span>, <span class="pl-c1">LL</span>&gt; E[N]; 
+<span class="pl-k">void</span> <span class="pl-en">addEdge</span>(<span class="pl-c1">LL</span> u, <span class="pl-c1">LL</span> v) {
     g[u].<span class="pl-c1">push_back</span>(v);
 }
-<span class="pl-k">bool</span> <span class="pl-en">check</span>(LL x) {
-    <span class="pl-c1">fill</span>(g.<span class="pl-c1">begin</span>(), g.<span class="pl-c1">end</span>(), vector&lt;LL&gt;());
+<span class="pl-k">bool</span> <span class="pl-en">check</span>(<span class="pl-c1">LL</span> x) {
+    <span class="pl-c1">fill</span>(g.<span class="pl-c1">begin</span>(), g.<span class="pl-c1">end</span>(), vector&lt;<span class="pl-c1">LL</span>&gt;());
     <span class="pl-c1">memset</span>(ind, <span class="pl-c1">0</span>, <span class="pl-k">sizeof</span>(ind));
     <span class="pl-c1">memset</span>(f, <span class="pl-c1">0</span>, <span class="pl-k">sizeof</span>(f));
-    <span class="pl-k">for</span> (LL i = <span class="pl-c1">1</span>; i &lt;= m; i++) {
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i = <span class="pl-c1">1</span>; i &lt;= m; i++) {
         <span class="pl-k">if</span> (a[E[i].<span class="pl-smi">first</span>] &lt;= x &amp;&amp; a[E[i].<span class="pl-smi">second</span>] &lt;= x) {
             <span class="pl-c1">addEdge</span>(E[i].<span class="pl-smi">first</span>, E[i].<span class="pl-smi">second</span>);
             ind[E[i].<span class="pl-smi">second</span>]++;
         }
     }
-    queue&lt;LL&gt; q;
-    <span class="pl-k">for</span> (LL i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
+    queue&lt;<span class="pl-c1">LL</span>&gt; q;
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
         <span class="pl-k">if</span> (!ind[i] &amp;&amp; a[i] &lt;= x) {
             q.<span class="pl-c1">push</span>(i);
             f[i] = <span class="pl-c1">1</span>;
         }
     }
     <span class="pl-k">while</span> (!q.<span class="pl-c1">empty</span>()) {
-        LL u = q.<span class="pl-c1">front</span>();
+        <span class="pl-c1">LL</span> u = q.<span class="pl-c1">front</span>();
         q.<span class="pl-c1">pop</span>();
-        <span class="pl-k">for</span> (LL v : g[u]) {
+        <span class="pl-k">for</span> (<span class="pl-c1">LL</span> v : g[u]) {
             f[v] = <span class="pl-c1">max</span>(f[v], f[u] + <span class="pl-c1">1</span>);
             <span class="pl-k">if</span> (--ind[v] == <span class="pl-c1">0</span>) {
                 q.<span class="pl-c1">push</span>(v);
             }
         }
     }
-    <span class="pl-k">for</span> (LL i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
         <span class="pl-k">if</span> (ind[i] || f[i] &gt;= k) {
             <span class="pl-k">return</span> <span class="pl-c1">true</span>;
         }
@@ -143,13 +143,13 @@ pair&lt;LL, LL&gt; E[N];
 <span class="pl-k">int</span> <span class="pl-en">main</span>() {
     <span class="pl-c1">ios::sync_with_stdio</span>(<span class="pl-c1">false</span>);cin.<span class="pl-c1">tie</span>(<span class="pl-c1">nullptr</span>);cout.<span class="pl-c1">tie</span>(<span class="pl-c1">nullptr</span>);
     cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
-    <span class="pl-k">for</span> (LL i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i = <span class="pl-c1">1</span>; i &lt;= n; i++) {
         cin &gt;&gt; a[i];
     }
-    <span class="pl-k">for</span> (LL i = <span class="pl-c1">1</span>; i &lt;= m; i++) {
+    <span class="pl-k">for</span> (<span class="pl-c1">LL</span> i = <span class="pl-c1">1</span>; i &lt;= m; i++) {
         cin &gt;&gt; E[i].<span class="pl-smi">first</span> &gt;&gt; E[i].<span class="pl-smi">second</span>;
     }
-    LL l = <span class="pl-c1">1</span>, r = <span class="pl-c1">1000000001</span>, mid, ans = -<span class="pl-c1">1</span>;
+    <span class="pl-c1">LL</span> l = <span class="pl-c1">1</span>, r = <span class="pl-c1">1000000001</span>, mid, ans = -<span class="pl-c1">1</span>;
     <span class="pl-k">while</span> (l &lt; r) {
         mid = (l + r) &gt;&gt; <span class="pl-c1">1</span>;
         <span class="pl-k">if</span> (<span class="pl-c1">check</span>(mid)) {

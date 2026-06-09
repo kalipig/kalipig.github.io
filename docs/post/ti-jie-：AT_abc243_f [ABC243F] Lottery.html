@@ -107,8 +107,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
      <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">1</span>;j&lt;=k;j++){<span class="pl-c"><span class="pl-c">//</span>抽了j次。</span>
         <span class="pl-k">for</span>(<span class="pl-k">int</span> p=<span class="pl-c1">1</span>;p&lt;=m;p++){<span class="pl-c"><span class="pl-c">//</span>有p个不同奖品的个数。</span>
            <span class="pl-k">for</span>(<span class="pl-k">int</span> q=<span class="pl-c1">1</span>;q&lt;=j;q++){<span class="pl-c"><span class="pl-c">//</span>在j次中，有q次抽到了i,至少一次。</span>
-               LL qt=<span class="pl-c1">qpow</span>(a[i]*<span class="pl-c1">mmi</span>(sum)%mod,q);<span class="pl-c"><span class="pl-c">//</span>q次抽到i,就是抽到一次的概率的q次方。</span>
-               LL way=comb[j][q];<span class="pl-c"><span class="pl-c">//</span>在这j次中，q次抽到i的组合。</span>
+               <span class="pl-c1">LL</span> qt=<span class="pl-c1">qpow</span>(a[i]*<span class="pl-c1">mmi</span>(sum)%mod,q);<span class="pl-c"><span class="pl-c">//</span>q次抽到i,就是抽到一次的概率的q次方。</span>
+               <span class="pl-c1">LL</span> way=comb[j][q];<span class="pl-c"><span class="pl-c">//</span>在这j次中，q次抽到i的组合。</span>
                dp[i][j][p]=(dp[i][j][p]+dp[i-<span class="pl-c1">1</span>][j-q][p-<span class="pl-c1">1</span>]*way%mod*qt%mod)%mod;<span class="pl-c"><span class="pl-c">//</span>不抽i的方案加上抽i的方案，注意取模。</span>
             }
          }
@@ -117,9 +117,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>Code</h3>
 <div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
 <span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
-<span class="pl-k">using</span> LL=<span class="pl-k">long</span> <span class="pl-k">long</span>;
-<span class="pl-k">const</span> LL mod=<span class="pl-c1">998244353</span>;
-LL n,m,k,dp[<span class="pl-c1">55</span>][<span class="pl-c1">55</span>][<span class="pl-c1">55</span>]={<span class="pl-c1">1</span>},comb[<span class="pl-c1">55</span>][<span class="pl-c1">55</span>],a[<span class="pl-c1">55</span>],sum;<span class="pl-c"><span class="pl-c">//</span> dp[i][j][k]：考虑前 i 个奖品，抽了 j 次，有 p 个不同奖品的概率</span>
+<span class="pl-k">using</span> <span class="pl-c1">LL</span>=<span class="pl-k">long</span> <span class="pl-k">long</span>;
+<span class="pl-k">const</span> <span class="pl-c1">LL</span> mod=<span class="pl-c1">998244353</span>;
+<span class="pl-c1">LL</span> n,m,k,dp[<span class="pl-c1">55</span>][<span class="pl-c1">55</span>][<span class="pl-c1">55</span>]={<span class="pl-c1">1</span>},comb[<span class="pl-c1">55</span>][<span class="pl-c1">55</span>],a[<span class="pl-c1">55</span>],sum;<span class="pl-c"><span class="pl-c">//</span> dp[i][j][k]：考虑前 i 个奖品，抽了 j 次，有 p 个不同奖品的概率</span>
 <span class="pl-k">void</span> <span class="pl-en">combination</span>(){
     <span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;=<span class="pl-c1">50</span>;i++){
         comb[i][<span class="pl-c1">0</span>]=<span class="pl-c1">1</span>;
@@ -128,8 +128,8 @@ LL n,m,k,dp[<span class="pl-c1">55</span>][<span class="pl-c1">55</span>][<span 
         }
     }
 }
-<span class="pl-k">inline</span> LL <span class="pl-en">qpow</span>(LL x,LL y){
-    LL res=<span class="pl-c1">1</span>;
+<span class="pl-k">inline</span> <span class="pl-c1">LL</span> <span class="pl-en">qpow</span>(<span class="pl-c1">LL</span> x,<span class="pl-c1">LL</span> y){
+    <span class="pl-c1">LL</span> res=<span class="pl-c1">1</span>;
     <span class="pl-k">while</span>(y){
         <span class="pl-k">if</span>(y&amp;<span class="pl-c1">1</span>) res*=x;
         x*=x;y/=<span class="pl-c1">2</span>;
@@ -137,7 +137,7 @@ LL n,m,k,dp[<span class="pl-c1">55</span>][<span class="pl-c1">55</span>][<span 
     }
     <span class="pl-k">return</span> res;
 }
-<span class="pl-k">inline</span> LL <span class="pl-en">mmi</span>(LL x){
+<span class="pl-k">inline</span> <span class="pl-c1">LL</span> <span class="pl-en">mmi</span>(<span class="pl-c1">LL</span> x){
     <span class="pl-k">return</span> <span class="pl-c1">qpow</span>(x,mod-<span class="pl-c1">2</span>);
 }
 <span class="pl-k">void</span> <span class="pl-en">DP</span>(){
@@ -151,8 +151,8 @@ LL n,m,k,dp[<span class="pl-c1">55</span>][<span class="pl-c1">55</span>][<span 
         <span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">1</span>;j&lt;=k;j++){
             <span class="pl-k">for</span>(<span class="pl-k">int</span> p=<span class="pl-c1">1</span>;p&lt;=m;p++){
                 <span class="pl-k">for</span>(<span class="pl-k">int</span> q=<span class="pl-c1">1</span>;q&lt;=j;q++){
-                    LL qt=<span class="pl-c1">qpow</span>(a[i]*<span class="pl-c1">mmi</span>(sum)%mod,q);
-                    LL way=comb[j][q];
+                    <span class="pl-c1">LL</span> qt=<span class="pl-c1">qpow</span>(a[i]*<span class="pl-c1">mmi</span>(sum)%mod,q);
+                    <span class="pl-c1">LL</span> way=comb[j][q];
                     dp[i][j][p]=(dp[i][j][p]+dp[i-<span class="pl-c1">1</span>][j-q][p-<span class="pl-c1">1</span>]*way%mod*qt%mod)%mod;
                 }
             }
